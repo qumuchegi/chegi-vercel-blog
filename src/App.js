@@ -15,12 +15,14 @@ function App() {
     storageRef.current = new StorageDb('mailTemplate')
     if (storageRef.current) {
       const cache = storageRef.current.get('周报模板')
+      console.log({cache})
       try {
-        if (!cache) {
+        if (cache) {
           const { gmailPassword, from, to, cc, subject } = JSON.parse(cache)
           console.log({
             gmailPassword, from, to, cc, subject
           })
+          //setAttribute
           passWordRef.current.value = gmailPassword
           fromRef.current.value = from
           toRef.current.value = to
