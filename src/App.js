@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect, useState, useCallback, useRef } from 'react';
 import './App.css';
+import {StorageDb} from './utils/storage'
 
 function App() {
   const [html, setHtml] = useState('')
@@ -9,7 +10,29 @@ function App() {
   const toRef = useRef()
   const ccRef = useRef()
   const subjectRef = useRef()
+  const storageRef = useRef()
+  useEffect(() => {
+    storageRef.current = new StorageDb('mailTemplate')
+    if (storageRef.current) {
+      const cache = storageRef.current.get('周报模板')
+      try {
+        if (!cache) {
+          const { gmailPassword, from, to, cc, subject } = JSON.parse(cache)
+          console.log({
+            gmailPassword, from, to, cc, subject
+          })
+          passWordRef.current.value = gmailPassword
+          fromRef.current.value = from
+          toRef.current.value = to
+          ccRef.current.value = cc
+          subjectRef.current.value = subject
+        }
+      } catch (err) {
+        console.error(err)
+      }
 
+    }
+  }, [])
   const sendTestGmail = useCallback(
     async () => {
       let _emailData = {
@@ -51,6 +74,17 @@ function App() {
               method: 'POST',
               mode: 'no-cors',
             })
+          const resBody = await res.json()
+          console.log({resBody})
+          if (resBody.code === 0) {
+            const {html, ...res} = _emailData
+            storageRef.current && storageRef.current.set(
+              '周报模板',
+              JSON.stringify({
+                ...res
+              })
+            )
+          }
         } catch (err) {
           alert(err)
         }
@@ -68,7 +102,7 @@ function App() {
   }, [])
   return (
     <main>
-      <h3>发送周报</h3>
+      <h3>周报模板</h3>
       <div>
         <input
           ref={passWordRef}
