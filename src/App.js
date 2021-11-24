@@ -106,6 +106,9 @@ function App() {
     <main>
       <h3>周报模板</h3>
       <div>
+        只需一次填写，后面可自动填充( 除了 html 文件)
+      </div>
+      <div>
         <input
           ref={passWordRef}
           type='text'
@@ -142,6 +145,7 @@ function App() {
         />
       </div>
       <div>
+        <span>周报 HTML 文件</span>
         <input
           type='file'
           onChange={onHtmlChange}
