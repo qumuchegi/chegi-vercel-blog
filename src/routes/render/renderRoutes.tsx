@@ -29,7 +29,7 @@ export function useRenderRouteContent(
                   path,
                   component
                 }, index) => {
-                  return <Route path={path} children={component}/>
+                  return <Route path={path} children={component} key={path + index}/>
                 })
              }
             {/* <Route path='*' component={()  => <>not found</>}/> */}
