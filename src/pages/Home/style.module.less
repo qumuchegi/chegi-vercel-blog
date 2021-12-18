@@ -1,0 +1,31 @@
+.tabContainer {
+  position: sticky;
+  top: 6rem;
+  margin-top: 0;
+  display: flex;
+  height: 2rem;
+  z-index: 10;
+  justify-content: flex-start;
+  font-family: "Comic Sans MS";
+  margin-left: 20px;
+  max-width: calc(100% - 40px);
+  overflow-x: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  background-color: #fff;
+  width: 100vw;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  .tabItem {
+    margin-right: 20px;
+  }
+  .tabItem:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  .selectedtabItem {
+    color: rgb(218, 68, 138);
+    text-decoration: underline;
+  }
+}

@@ -12,3 +12,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+
+body::selection {
+  color: #fff !important;
+  background: rgb(197, 72, 187);
+}
+
+body::-moz-selection {
+  background:#d3d3d3; 
+  color:#555;
+}
+
+body::-webkit-selection {
+  background:#d3d3d3; 
+  color:#555;
+}
