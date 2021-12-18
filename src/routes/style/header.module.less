@@ -1,11 +1,21 @@
 .header  {
-  position: sticky;
-  top: 0;
   z-index: 10;
-  font-family: "Bradley Hand", cursive;
-  font-size: 4rem;
+  display: flex;
+  margin: 0;
+  justify-content: space-between;
+  .title {
+    font-family: "Bradley Hand", cursive;
+    font-size: 4rem;
+  }
   padding: 10px 20px;
   height: 5rem;
-  width: 100%;
+  width: calc(100vw  - 60px);
   background-color: #fff;
+}
+.hideAvatar {
+  position: sticky;
+  top: 0px;
+  z-index: 11;
+  margin-top: 5rem;
+  background-color: antiquewhite;
 }

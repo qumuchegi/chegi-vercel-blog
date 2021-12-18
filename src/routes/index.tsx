@@ -37,8 +37,11 @@ function RoutesContent() {
   }, [])
   return <div>
     <div className={headerStyles.header}>
-      Chegi's space
+      <div className={headerStyles.title}>Chegi's space</div>
     </div>
+    {/* <div className={headerStyles.hideAvatar}>
+        hahaah 
+    </div> */}
     {content}
   </div>
 }

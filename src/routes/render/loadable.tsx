@@ -20,7 +20,7 @@ export function Loadable({
     <div className={childrenLayout === 'horzontal' ? styles.horzontalLayout : styles.verticleLayout}>
       <LazyComponent />
       {/* <div>{renderChildRoutes?.navs}</div> */}
-      <div>{renderChildRoutes?.content}</div>
+      {renderChildRoutes?.content}
     </div>
   </Suspense>
 }
