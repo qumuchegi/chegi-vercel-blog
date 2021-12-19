@@ -9,12 +9,14 @@ import styles from './styles.module.less'
 export default function ArticleList() {
   const params: {tabId: string} = useParams()
   // console.log({ params });
+  const isNarrowDevice = useStore(state => state.uiState.isNarrowDevice)
   const getArticlesByTabName = useStore(state => state.articles.actions.getArticlesByTabName)
   const changeSelectedTab = useStore(state => state.uiState.actions.changeSelectedTab)
   const selectedTab = useStore(state => state.uiState.selectedTab)
   const selectedArticleId = useStore(state => state.uiState.selectedArticleId)
   const changeSelectedArticle = useStore(state => state.uiState.actions.changeSelectedArticle)
   const hadAutoSelec = useRef(false)
+  const [isOpenListDetail, setIsOpenListDetail] = useState<boolean>(false)
   useEffect(() => {
     if (hadAutoSelec.current) {
       return
@@ -23,15 +25,22 @@ export default function ArticleList() {
     hadAutoSelec.current = true
   }, [params])
   const toArticleDetail = useNaviToArticleDetail() // { articleId: '12' }
+  const openListDetail = useCallback(() => {
+    if (!isNarrowDevice) {
+      return
+    }
+    setIsOpenListDetail(true)
+  },  [])
   const onSelectArticle = useCallback(
     (articleId: string) => {
+      openListDetail()
       toArticleDetail({
         tabId: selectedTab,
         articleId: articleId
       })
       changeSelectedArticle(articleId)
     },
-    [changeSelectedArticle, selectedTab]
+    [changeSelectedArticle, selectedTab, openListDetail]
   )
   const articleList = useMemo(() => {
     if (selectedTab) {
@@ -62,6 +71,13 @@ export default function ArticleList() {
   }, [getArticlesByTabName, selectedTab])
 
   return <div className={styles.articleList}>
-    {articleList}
+    {
+      isNarrowDevice ?
+        <details open={isOpenListDetail}>
+          <summary className={styles.listSummary}>article list</summary>
+          <p>{articleList}</p>
+        </details>
+        : articleList
+    }
   </div>
 }

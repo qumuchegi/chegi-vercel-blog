@@ -2,6 +2,12 @@
   z-index: 10;
   display: flex;
   margin: 0;
+  @media screen and (max-width: 768px) {
+    width: 100vw;
+  }
+  @media screen and (min-width: 768px) {
+    width: calc(100vw  - 60px);
+  }
   justify-content: space-between;
   .title {
     font-family: "Bradley Hand", cursive;
@@ -9,7 +15,6 @@
   }
   padding: 10px 20px;
   height: 5rem;
-  width: calc(100vw  - 60px);
   background-color: #fff;
 }
 .hideAvatar {

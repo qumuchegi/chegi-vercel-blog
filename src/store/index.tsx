@@ -3,6 +3,7 @@ import { ArticleInfo, Store, TabArticles } from './type'
 
 const defaultContextValue: Store = {
   uiState: {
+    isNarrowDevice: false,
     selectedTab: '',
     selectedArticleId: '',
     actions: {
@@ -78,6 +79,7 @@ const ConnectStore = ({ children }: { children: React.ReactChild }) => {
       ...store,
       uiState: {
         ...store.uiState,
+        isNarrowDevice: (window.screen.availWidth < 768),
         actions: {
           changeSelectedTab,
           changeSelectedArticle

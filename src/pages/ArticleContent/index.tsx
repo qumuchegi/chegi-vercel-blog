@@ -3,15 +3,9 @@ import { useStore } from '@/store';
 import React, { useRef, useState, useEffect, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
 import { getNotionArticleRecordMaps } from '@/api'
-import { NotionRenderer } from 'react-notion-x'
-// core styles shared by all of react-notion-x (required)
+import { NotionRenderer, Equation, Collection, CollectionRow } from 'react-notion-x'
+import Code from '@/Components/Code'
 import 'react-notion-x/src/styles.css'
-// // used for code syntax highlighting (optional)
-// import 'prismjs/themes/prism-tomorrow.css'
-// // used for collection views (optional)
-// import 'rc-dropdown/assets/index.css'
-// // used for rendering equations (optional)
-// import 'katex/dist/katex.min.css'
 import styles from './styles.module.less'
 import './rewriteNotionXStyle.less'
 
@@ -51,13 +45,21 @@ export default function ArticleContent() {
   return <div className={styles.contentContainer}>
     {
       isLoadind ?
-        <div>loading...</div>
+        <div className={styles.loading}>loading...</div>
       : ( articleBlocks &&
         <NotionRenderer
           recordMap={articleBlocks}
           fullPage={false}
           darkMode={false}
+          showTableOfContents
+          // rootDomain
           className={styles.content}
+          components={{
+            equation: Equation,
+            code: Code, 
+            collection: Collection, 
+            collectionRow: CollectionRow
+          }}
         />)
     }
   </div>

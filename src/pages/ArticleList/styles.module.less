@@ -1,7 +1,5 @@
 .articleList {
-  position: sticky;
-  top: 4rem;
-  max-height: calc(100vh - 5rem - 40px - 2rem - 2rem);
+  background-color: #fff;
   // flex: 1;
   // background-color: rgb(228, 240, 199);
   min-width: calc(20rem - 20px);
@@ -10,6 +8,20 @@
   padding: 10px;
   font-family: 'Brush Script Std', 'Hannotate SC';
   font-weight: 600;
+  // @media screen and (max-width: 768px) {
+  //   max-height: 200px;
+  // }
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  @media screen and (min-width: 768px) {
+    position: sticky;
+    top: 5rem;
+    z-index: 10;
+    max-height: calc(100vh - 5rem - 40px - 2rem - 2rem);
+  }
+  overflow-y: scroll;
   .listItem {
     margin: 5px 0;
   }
@@ -24,5 +36,8 @@
   }
 }
 .warnText {
+  color: darkred;
+}
+.listSummary {
   color: darkred;
 }

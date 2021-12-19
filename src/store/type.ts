@@ -20,6 +20,7 @@ export type TabArticles = {
 
 export type Store = {
   uiState: {
+    isNarrowDevice: boolean // 是否是窄屏
     selectedTab: string
     selectedArticleId: string
     actions: {

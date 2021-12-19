@@ -28,7 +28,10 @@ const ArticleRoute: RouteItem = {
       )
     }
     childRoutes={[ArticlContentRoue]}
-    childrenLayout='horzontal'
+    childrenLayout={
+      window.screen.availWidth < 768
+      ? 'verticle' : 'horzontal'
+    }
   />
 }
 
