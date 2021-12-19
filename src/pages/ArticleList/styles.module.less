@@ -23,7 +23,7 @@
   }
   overflow-y: scroll;
   .listItem {
-    margin: 5px 0;
+    margin: 10px 0;
   }
 
   .listItem:hover {
@@ -32,7 +32,13 @@
   }
 
   .listItemSelected {
+    color: rgb(34, 146, 146);
     text-decoration: underline;
+    display: flex;
+    justify-content: flex-start;
+    &::before {
+      content: '>>';
+    }
   }
 }
 .warnText {

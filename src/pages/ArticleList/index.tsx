@@ -25,7 +25,6 @@ export default function ArticleList() {
     hadAutoSelec.current = true
   }, [params])
   const openListDetail = useCallback(() => {
-    console.log({isNarrowDevice});
     if (!isNarrowDevice) {
       return
     }

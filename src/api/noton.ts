@@ -26,7 +26,6 @@ export async function getNotionArticleRecordMaps(articleId: string) {
         articleId
       }
     )
-    console.log('getNotionArticleContent:', res)
     return res
   } catch (err) {
     __DEV__ && console.error('getNotionArticleContent error:', err)

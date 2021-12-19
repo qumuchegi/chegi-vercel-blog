@@ -62,11 +62,10 @@ export default function ArticleContent() {
           fullPage={false}
           darkMode={false}
           showTableOfContents
-          showCollectionViewDropdown
+          showCollectionViewDropdown={false}
           // rootDomain
           previewImages
           className={styles.content}
-          //rootDomain='https://chegi.notion.site/'
           components={{
             equation: Equation,
             code: Code, 
