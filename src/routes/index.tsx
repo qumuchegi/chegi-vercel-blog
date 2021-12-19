@@ -35,9 +35,12 @@ function RoutesContent() {
   useEffect(() => {
     fetchTabArticles()
   }, [])
+  const toHome = useCallback(() => {
+    window.location.pathname = '/'
+  }, [])
   return <div>
     <div className={headerStyles.header}>
-      <div className={headerStyles.title}>Chegi's space</div>
+      <div className={headerStyles.title}  onClick={toHome}>Chegi's space</div>
     </div>
     {/* <div className={headerStyles.hideAvatar}>
         hahaah 

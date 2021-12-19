@@ -24,23 +24,27 @@ export default function ArticleList() {
     changeSelectedTab(params.tabId)
     hadAutoSelec.current = true
   }, [params])
-  const toArticleDetail = useNaviToArticleDetail() // { articleId: '12' }
   const openListDetail = useCallback(() => {
+    console.log({isNarrowDevice});
     if (!isNarrowDevice) {
       return
     }
     setIsOpenListDetail(true)
-  },  [])
+  },  [isNarrowDevice])
+  useEffect(() => {
+    openListDetail()
+  }, [openListDetail, params.tabId])
+  const toArticleDetail = useNaviToArticleDetail() // { articleId: '12' }
+
   const onSelectArticle = useCallback(
     (articleId: string) => {
-      openListDetail()
       toArticleDetail({
         tabId: selectedTab,
         articleId: articleId
       })
       changeSelectedArticle(articleId)
     },
-    [changeSelectedArticle, selectedTab, openListDetail]
+    [changeSelectedArticle, selectedTab]
   )
   const articleList = useMemo(() => {
     if (selectedTab) {

@@ -36,11 +36,11 @@ export default function Home() {
     }
   }, [tabNames, selectedTab, onPressTab])
 
-  useEffect(() => {
-    if (!selectedTab) {
-      changeSelectedTab(tabNames[0])
-    }
-  }, [tabNames, changeSelectedTab])
+  // useEffect(() => {
+  //   if (!selectedTab) {
+  //     changeSelectedTab(tabNames[0])
+  //   }
+  // }, [tabNames, changeSelectedTab])
   
   return <div className={styles.tabContainer}>
     {tabs}

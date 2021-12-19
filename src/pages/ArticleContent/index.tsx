@@ -1,4 +1,3 @@
-import { useNaviToHome } from '@/routes/category/home'
 import { useStore } from '@/store';
 import React, { useRef, useState, useEffect, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
@@ -52,8 +51,11 @@ export default function ArticleContent() {
           fullPage={false}
           darkMode={false}
           showTableOfContents
+          showCollectionViewDropdown
           // rootDomain
+          previewImages
           className={styles.content}
+          //rootDomain='https://chegi.notion.site/'
           components={{
             equation: Equation,
             code: Code, 

@@ -4,6 +4,20 @@ import ArticleRoute from './article'
 import { Loadable } from '../render'
 import { useHistory } from 'react-router-dom'
 
+const WelcomeRoute: RouteItem = {
+  title: 'welcome page',
+  path: '/',
+  exact: true,
+  component: <Loadable
+    LazyComponent={
+      lazy(
+        () => import(
+          /*welcome*/ '@/pages/Welcome'
+        )
+      )
+    }
+  />
+}
 const HomeRoute: RouteItem = {
   title: `chegi's blog`,
   path: '/',
@@ -16,7 +30,10 @@ const HomeRoute: RouteItem = {
           )
         )
       }
-      childRoutes={[ArticleRoute]}
+      childRoutes={[
+        WelcomeRoute,
+        ArticleRoute
+      ]}
     />
 }
 export const useNaviToHome = () => {

@@ -27,9 +27,10 @@ export function useRenderRouteContent(
               routes.map(
                 ({
                   path,
-                  component
+                  component,
+                  exact
                 }, index) => {
-                  return <Route path={path} children={component} key={path + index}/>
+                  return <Route exact={exact} path={path} children={component} key={path + index}/>
                 })
              }
             {/* <Route path='*' component={()  => <>not found</>}/> */}
