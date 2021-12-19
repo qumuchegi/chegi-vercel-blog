@@ -64,10 +64,11 @@ function _formatCMSData(cmsData: unknown): {
       pageTitle,
       pageShortDescription,
       thumbnail,
-      tag
+      tag,
+      progress
     } = properties
     const tabName = tab.select?.name
-    if (!tabName) {
+    if (!tabName || progress?.select.name === 'doing') {
       return
     }
     const articleTitle = pageTitle.title?.[0]?.plain_text

@@ -1,6 +1,3 @@
-const fs = require('fs')
-const https = require('https')
-const axios = require('axios')
 const { NotionAPI } = require('notion-client') 
 const { Client: NotionClinet } = require("@notionhq/client")
 const conf = require('./config.json')
@@ -29,15 +26,16 @@ async function getNotionCMS() {
   const res = await notionApi.databases.query({
     database_id: parsePageId(cmsPageId)
   })
+  // console.log({res})
   return res.results
 }
 
 
  function formatCMSData(cmsData) {
    let result = {}
-   console.log({
+   console.log(JSON.stringify({
     cmsData
-   })
+   }))
    Object.values(cmsData).forEach(({
     id,
     url,
@@ -50,7 +48,8 @@ async function getNotionCMS() {
       pageTitle,
       pageShortDescription,
       thumbnail,
-      tag
+      tag,
+      progress
     } = properties
     const tabName = tab.select?.name
     if (!tabName) {
@@ -69,20 +68,17 @@ async function getNotionCMS() {
         title: articleTitle,
         description,
         thumbnail: thumbnailUrl,
-        tag
+        tag,
       }
     ]
   })
   return result
  }
+(async () => {
 
-// (async () => {
-//   console.log(
-//     JSON.stringify(
-//       formatCMSData(await getNotionCMS())
-//     )
-//   )  
-//  })()
+      formatCMSData(await getNotionCMS())
+  
+ })()
 
 // async function getSingleArticleInfo(articleId) {
 //   const res = await notionApi.pages.properties({
@@ -98,11 +94,11 @@ async function getContentOfArticleForRender(articleId) {
   )
   return res
 }
-(async () => {
-  console.log(
-    '999',
-    JSON.stringify(
-      await getContentOfArticleForRender('ee4c30e7-b069-4b99-95b5-5df818afa815')
-    )
-  )  
- })()
+// (async () => {
+//   console.log(
+//     '999',
+//     JSON.stringify(
+//       await getContentOfArticleForRender('ee4c30e7-b069-4b99-95b5-5df818afa815')
+//     )
+//   )  
+//  })()
