@@ -33,9 +33,9 @@ async function getNotionCMS() {
 
  function formatCMSData(cmsData) {
    let result = {}
-   console.log(JSON.stringify({
-    cmsData
-   }))
+  //  console.log(JSON.stringify({
+  //   cmsData
+  //  }))
    Object.values(cmsData).forEach(({
     id,
     url,
@@ -52,7 +52,7 @@ async function getNotionCMS() {
       progress
     } = properties
     const tabName = tab.select?.name
-    if (!tabName) {
+    if (!tabName || progress?.select?.name === 'doing') {
       return
     }
     const articleTitle = pageTitle.title?.[0]?.plain_text
@@ -75,9 +75,9 @@ async function getNotionCMS() {
   return result
  }
 (async () => {
-
-      formatCMSData(await getNotionCMS())
-  
+  console.log(JSON.stringify(
+    formatCMSData(await getNotionCMS())
+  ))
  })()
 
 // async function getSingleArticleInfo(articleId) {

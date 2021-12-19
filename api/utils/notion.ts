@@ -68,7 +68,7 @@ function _formatCMSData(cmsData: unknown): {
       progress
     } = properties
     const tabName = tab.select?.name
-    if (!tabName || progress?.select.name === 'doing') {
+    if (!tabName || progress?.select?.name === 'doing') {
       return
     }
     const articleTitle = pageTitle.title?.[0]?.plain_text
