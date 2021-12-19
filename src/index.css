@@ -28,3 +28,38 @@ body::-webkit-selection {
   background:#d3d3d3; 
   color:#555;
 }
+
+@font-face {
+  font-family: 'Oooh Baby';
+  src:  url('./assets/font/Oooh_Baby/OoohBaby-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Long_Cang';
+  src:  url('./assets/font/Long_Cang//LongCang-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'ZCOOL_KuaiLe';
+  src:  url('./assets/font/ZCOOL_KuaiLe/ZCOOLKuaiLe-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'ZCOOL XiaoWei';
+  src:  url('./assets/font/ZCOOL_XiaoWei/ZCOOLXiaoWei-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Kalam_Light';
+  src:  url('./assets/font/Kalam/Kalam-Light.ttf');
+}
+
+@font-face {
+  font-family: 'Kalam_Regular';
+  src:  url('./assets/font/Kalam/Kalam-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Kalam_Bold';
+  src:  url('./assets/font/Kalam/Kalam-Bold.ttf');
+}

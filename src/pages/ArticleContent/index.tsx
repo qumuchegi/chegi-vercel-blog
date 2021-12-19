@@ -7,10 +7,12 @@ import Code from '@/Components/Code'
 import 'react-notion-x/src/styles.css'
 import styles from './styles.module.less'
 import './rewriteNotionXStyle.less'
+import Loading from '@/Components/Loading';
+import { combineClassNames } from '@/utils/style';
 
 export default function ArticleContent() {
   const params: { articleId: string } = useParams()
-  const [isLoadind, setisLoading] = useState(false)
+  const [isLoading, setisLoading] = useState(false)
   const [articleBlocks, setArticleBlocks] = useState<any>()
   const selectedArticleId = useStore(state => state.uiState.selectedArticleId)
   const changeSelectedArticle = useStore(state => state.uiState.actions.changeSelectedArticle)
@@ -43,9 +45,18 @@ export default function ArticleContent() {
   }, [params])
   return <div className={styles.contentContainer}>
     {
-      isLoadind ?
-        <div className={styles.loading}>loading...</div>
-      : ( articleBlocks &&
+      <div className={
+        combineClassNames(
+          styles.loading,
+          isLoading ? styles.loadingShow : styles.loadingHide
+        )
+        }>
+        <Loading text="loading... ..." infinite/>
+      </div>
+    }
+    {
+      !isLoading &&
+      ( articleBlocks &&
         <NotionRenderer
           recordMap={articleBlocks}
           fullPage={false}
