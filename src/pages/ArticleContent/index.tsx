@@ -9,6 +9,7 @@ import styles from './styles.module.less'
 import './rewriteNotionXStyle.less'
 import Loading from '@/Components/Loading';
 import { combineClassNames } from '@/utils/style';
+import Skeleton from '@/Components/Skeleton';
 
 export default function ArticleContent() {
   const params: { articleId: string } = useParams()
@@ -44,16 +45,24 @@ export default function ArticleContent() {
     })
   }, [params])
   return <div className={styles.contentContainer}>
-    {
-      <div className={
-        combineClassNames(
-          styles.loading,
-          isLoading ? styles.loadingShow : styles.loadingHide
-        )
-        }>
-        <Loading text="loading... ..." infinite/>
-      </div>
-    }
+    <Skeleton className={
+      combineClassNames(
+        styles.loadingSkeleton,
+        styles.loadingSkeleton_header
+      )
+    } showSkeleton={isLoading} />
+    <Skeleton className={
+      combineClassNames(
+        styles.loadingSkeleton,
+        styles.loadingSkeleton_content
+      )
+    } showSkeleton={isLoading} />
+    <Skeleton className={
+      combineClassNames(
+        styles.loadingSkeleton,
+        styles.loadingSkeleton_footer
+      )
+    } showSkeleton={isLoading}/>
     {
       !isLoading &&
       ( articleBlocks &&

@@ -1,3 +1,4 @@
+import SearchSelect from '@/Components/SearchSelect'
 import { useNaviToArticleDetail } from '@/routes/category/article'
 import { useStore } from '@/store'
 import { ArticleInfo } from '@/store/type'
@@ -74,6 +75,20 @@ export default function ArticleList() {
   }, [getArticlesByTabName, selectedTab])
 
   return <div className={styles.articleList}>
+    <SearchSelect options={[
+      {
+        key: '1',
+        value: '1'
+      },
+      {
+        key: '2',
+        value: '2'
+      },
+      {
+        key: '3',
+        value: '3'
+      }
+    ]}/>
     {
       isNarrowDevice ?
         <details open={isOpenListDetail}>

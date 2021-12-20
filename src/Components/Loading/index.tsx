@@ -3,7 +3,9 @@ import './style.less'
 
 export enum AnimType {
   Jump = 'jump',
-  Pop = 'pop'
+  Pop = 'pop',
+  Flip = 'flip',
+  Blink = 'blink'
 }
 
 export default forwardRef(Loading)

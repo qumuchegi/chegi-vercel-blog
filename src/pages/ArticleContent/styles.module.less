@@ -28,4 +28,25 @@
   .loadingHide {
     display: none;
   }
+  .loadingSkeleton {
+    @media screen and (max-width: 768px) {
+      width: calc(100vw) ;
+    }
+    @media screen and (min-width: 768px) {
+      width: 700px ;
+    }
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+.loadingSkeleton_header {
+  height: 20px;
+}
+.loadingSkeleton_content {
+  margin-top: 20px;
+  height: 100px;
+}
+.loadingSkeleton_footer {
+  margin-top: 20px;
+  height: 200px;
 }
