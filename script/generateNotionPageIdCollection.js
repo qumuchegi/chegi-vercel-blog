@@ -1,11 +1,12 @@
 const { NotionAPI } = require('notion-client') 
 const { Client: NotionClinet } = require("@notionhq/client")
-const conf = require('./config.json')
 
-const {
+// node script/generateNotionPageIdCollection.js {myNotionAuthToken} {myBlogsCollectionId}
+const [
   notionAuthToken,
   cmsPageId
-} = conf
+ ] = process.argv.slice(2)
+
 const notionApi = new NotionClinet({
   auth: notionAuthToken
 })

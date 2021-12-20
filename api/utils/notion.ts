@@ -1,13 +1,9 @@
 import { ArticleInfo } from '../types/notion'
 const { Client: NotionClinet } = require("@notionhq/client")
 const { NotionAPI } = require('notion-client') 
-const conf = require('../configure/notion.json')
 
-const {
-  notionAuthToken,
-  collectionId
-} = conf
-
+const notionAuthToken = process.env.myNotionAuthToken
+const collectionId = process.env.myBlogsCollectionId
 const notionAPI = new NotionClinet({
   auth: notionAuthToken
 })

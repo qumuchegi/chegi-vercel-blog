@@ -1,13 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getAllTabArticleList, getSingleArticleInfo } from './utils/notion'
-import notionConf from './configure/notion.json'
-import { CollectionViewBlock } from 'notion-types'
-const { Client: NotionClinet } = require("@notionhq/client")
-
-const {
-  notionAuthToken,
-  collectionId
-} = notionConf
 
 export default async function getNotionBlogs(req: NextApiRequest, res: NextApiResponse) {
   try {
