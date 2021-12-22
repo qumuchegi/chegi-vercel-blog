@@ -17,7 +17,7 @@
     "react-transition-group": "^4.4.2"
   },
   "scripts": {
-    "dev": "BROWSER=none react-app-rewired --openssl-legacy-provider start",
+    "start": "BROWSER=none react-app-rewired --openssl-legacy-provider start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject"
