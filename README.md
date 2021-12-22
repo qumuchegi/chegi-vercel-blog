@@ -14,11 +14,13 @@ install the project dependencies:  `yarn install`
 
 ## dev
 
-start web page dev server, and start vercel serverless function dev server
+in the root of this project
 
-in the root of this project, execute command `vercel dev`
+>execute command `vercel login` for login
 
-then will output log bellow when success:
+to start web page dev server, and start vercel serverless function dev server
+
+>execute command `vercel dev` , hen will output log bellow when success:
 
 ```shell
 ❯ vercel dev
