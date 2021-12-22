@@ -3,6 +3,8 @@ import { useNaviToArticleList } from '@/routes/category/article'
 import styles from './style.module.less'
 import { useStore } from '@/store'
 import { combineClassNames } from '@/utils/style'
+import { repeatArr } from '@/utils/array'
+import Skeleton from '@/Components/Skeleton'
 
 export default function Home() {
   const toArticleList = useNaviToArticleList()
@@ -18,7 +20,7 @@ export default function Home() {
   }, [toArticleList, changeSelectedTab, changeSelectedArticle])
 
   const tabs = useMemo(() => {
-    if (tabNames) {
+    if (tabNames.length) {
       return tabNames.map(
         tabName => <div
           key={tabName}
@@ -34,7 +36,11 @@ export default function Home() {
         </div>
       )
     } else {
-      return null
+      return repeatArr(
+        <Skeleton showSkeleton className={styles.tabSkeleton}/>,
+        4,
+        (_, index) => <div key={index}>{_}</div>
+      )
     }
   }, [tabNames, selectedTab, onPressTab])
 
@@ -45,6 +51,8 @@ export default function Home() {
   // }, [tabNames, changeSelectedTab])
   
   return <div className={styles.tabContainer}>
-    {tabs}
+    {
+      tabs
+    }
   </div>
 }

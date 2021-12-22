@@ -75,7 +75,7 @@ export default function ArticleList() {
   }, [getArticlesByTabName, selectedTab])
 
   return <div className={styles.articleList}>
-    <SearchSelect options={[
+    {/* <SearchSelect options={[
       {
         key: '1',
         value: '1'
@@ -88,7 +88,7 @@ export default function ArticleList() {
         key: '3',
         value: '3'
       }
-    ]}/>
+    ]}/> */}
     {
       isNarrowDevice ?
         <details open={isOpenListDetail}>

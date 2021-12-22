@@ -6,6 +6,7 @@ const defaultContextValue: Store = {
     isNarrowDevice: false,
     selectedTab: '',
     selectedArticleId: '',
+
     actions: {
       changeSelectedTab: (tabName: string) => { },
       changeSelectedArticle: (articleId: string) => { },
