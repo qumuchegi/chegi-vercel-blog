@@ -14,21 +14,18 @@ code {
 }
 
 
-body::selection {
+::selection {
   color: #fff !important;
-  background: rgb(197, 72, 187);
+  background: rgb(197, 72, 187) !important;
 }
-
-body::-moz-selection {
-  background:#d3d3d3; 
-  color:#555;
+::-moz-selection {
+  color: #fff !important;
+  background: rgb(197, 72, 187) !important;
 }
-
-body::-webkit-selection {
-  background:#d3d3d3; 
-  color:#555;
+::-webkit-selection {
+  color: #fff !important;
+  background: rgb(197, 72, 187) !important;
 }
-
 @font-face {
   font-family: 'Oooh Baby';
   src:  url('./assets/font/Oooh_Baby/OoohBaby-Regular.ttf');
