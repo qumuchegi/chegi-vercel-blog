@@ -32,7 +32,8 @@ export type Store = {
     tabArticles: TabArticles,
     actions: {
       getArticlesByTabName: (tabName: string) => any,
-      recordTabBlogs: (tabArticles: TabArticles) => void
+      recordTabBlogs: (tabArticles: TabArticles) => void,
+      getArticleInfo: (articleId: string) => ArticleInfo | null
     }
   }
 }

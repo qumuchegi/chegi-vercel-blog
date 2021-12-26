@@ -16,7 +16,8 @@ const defaultContextValue: Store = {
     tabArticles: {},
     actions: {
       getArticlesByTabName: () => {},
-      recordTabBlogs: () => {}
+      recordTabBlogs: () => {},
+      getArticleInfo: (id) => null
     }
   }
 }
@@ -75,6 +76,28 @@ const ConnectStore = ({ children }: { children: React.ReactChild }) => {
   const changeSelectedArticle = useCallback((articleId: string) => {
     dispatch({ type: 'changeArticle', payload: { articleId }})
   }, [])
+  const getArticleInfo = useCallback((articleId: string) => {
+    const articles = Object.values(
+        (store?.articles.tabArticles ?? {})
+    )
+      //@ts-ignore
+      .reduce((flatTabArticles, tabArticles) => {
+        return [
+          //@ts-ignore
+          ...flatTabArticles,
+          //@ts-ignore
+          ...Object.values(tabArticles)
+        ]
+      }, [])
+    //@ts-ignore
+    return articles
+      .find(({
+        //@ts-ignore
+        articleId: _articleId
+      }) => {
+        return articleId === _articleId
+    }) || null
+  }, [store?.articles])
   return <storeContext.Provider value={
     useMemo(() => ({
       ...store,
@@ -90,10 +113,11 @@ const ConnectStore = ({ children }: { children: React.ReactChild }) => {
         ...store.articles,
         actions: {
           recordTabBlogs,
-          getArticlesByTabName
+          getArticlesByTabName,
+          getArticleInfo
         }
       }
-    }), [recordTabBlogs, store, changeSelectedTab, changeSelectedArticle])
+    }), [recordTabBlogs, store, getArticleInfo, changeSelectedTab, changeSelectedArticle])
   }>
     {children}
   </storeContext.Provider>

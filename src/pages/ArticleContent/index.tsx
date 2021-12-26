@@ -10,13 +10,16 @@ import './rewriteNotionXStyle.less'
 import Loading from '@/Components/Loading';
 import { combineClassNames } from '@/utils/style';
 import Skeleton from '@/Components/Skeleton';
+import { ArticleInfo } from '@/store/type';
 
 export default function ArticleContent() {
   const params: { articleId: string } = useParams()
   const [isLoading, setisLoading] = useState(false)
+  const [articleInfo, setArticleInfo] = useState<ArticleInfo>()
   const [articleBlocks, setArticleBlocks] = useState<any>()
   const selectedArticleId = useStore(state => state.uiState.selectedArticleId)
   const changeSelectedArticle = useStore(state => state.uiState.actions.changeSelectedArticle)
+  const getArticleInfo = useStore(state => state.articles.actions.getArticleInfo)
   useEffect(() => {
     changeSelectedArticle(params.articleId)
   }, [params])
@@ -37,6 +40,11 @@ export default function ArticleContent() {
   useEffect(() => {
     fetchArticleContent()
   }, [fetchArticleContent])
+  useEffect(() => {
+    const _articleInfo = getArticleInfo(params.articleId) || {}
+    window.document.title = _articleInfo.title
+    setArticleInfo(_articleInfo)
+  }, [params, getArticleInfo])
   useEffect(() => {
     window.scrollTo({
       left: 0,
@@ -62,7 +70,14 @@ export default function ArticleContent() {
         styles.loadingSkeleton,
         styles.loadingSkeleton_footer
       )
-    } showSkeleton={isLoading}/>
+    } showSkeleton={isLoading} />
+    {
+      !isLoading &&
+      articleBlocks && 
+      <h2 className={styles.title}>
+        {articleInfo?.title}
+      </h2>
+    }
     {
       !isLoading &&
       ( articleBlocks &&
