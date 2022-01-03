@@ -6,6 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #fff;
 }
 
 code {
@@ -59,4 +60,9 @@ code {
 @font-face {
   font-family: 'Kalam_Bold';
   src:  url('./assets/font/Kalam/Kalam-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'YouYuan';
+  src: url('./assets/font/QingNingYouYuan-2.ttf')
 }

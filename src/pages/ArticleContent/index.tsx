@@ -92,7 +92,7 @@ export default function ArticleContent() {
           className={styles.content}
           components={{
             equation: Equation,
-            code: Code, 
+            code: Code,
             collection: Collection, 
             collectionRow: CollectionRow
           }}
