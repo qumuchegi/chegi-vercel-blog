@@ -4,8 +4,6 @@ export type ArticleInfo = {
   createdTime: string
   lastEditedTime: string
   title: string
-  description: string
-  thumbnail?: string
   tag: {
     id: string
     name: string

@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useMemo, useCallback } from 'react';
+import React, { Suspense } from 'react';
 import { RouteItem } from '../types';
 import { useRenderRouteContent } from './renderRoutes';
 import styles from '../style/loadable.module.less'

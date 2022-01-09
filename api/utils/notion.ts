@@ -58,8 +58,6 @@ function _formatCMSData(cmsData: unknown): {
     const {
       tab,
       pageTitle,
-      pageShortDescription,
-      thumbnail,
       tag,
       progress
     } = properties
@@ -68,8 +66,6 @@ function _formatCMSData(cmsData: unknown): {
       return
     }
     const articleTitle = pageTitle.title?.[0]?.plain_text
-    const description = pageShortDescription.rich_text[0]?.plain_text
-    const thumbnailUrl = thumbnail.files[0]?.file.url
     result[tabName] = [
       ...(result[tabName] || []),
       {
@@ -78,8 +74,6 @@ function _formatCMSData(cmsData: unknown): {
         createdTime: created_time,
         lastEditedTime: last_edited_time,
         title: articleTitle,
-        description,
-        thumbnail: thumbnailUrl,
         tag
       }
     ]

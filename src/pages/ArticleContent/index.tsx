@@ -11,6 +11,7 @@ import Loading from '@/Components/Loading';
 import { combineClassNames } from '@/utils/style';
 import Skeleton from '@/Components/Skeleton';
 import { ArticleInfo } from '@/store/type';
+import { useLazyImgLoading } from '@/hooks'
 
 export default function ArticleContent() {
   const params: { articleId: string } = useParams()
@@ -52,6 +53,10 @@ export default function ArticleContent() {
       behavior: 'smooth'
     })
   }, [params])
+  // useLazyImgLoading({
+  //   //@ts-ignore
+  //   container: document.getElementById('article-content')
+  // })
   return <div className={styles.contentContainer}>
     <Skeleton className={
       combineClassNames(
@@ -81,22 +86,26 @@ export default function ArticleContent() {
     {
       !isLoading &&
       ( articleBlocks &&
-        <NotionRenderer
-          recordMap={articleBlocks}
-          fullPage={false}
-          darkMode={false}
-          showTableOfContents
-          showCollectionViewDropdown={false}
-          // rootDomain
-          previewImages
-          className={styles.content}
-          components={{
-            equation: Equation,
-            code: Code,
-            collection: Collection, 
-            collectionRow: CollectionRow
-          }}
-        />)
+        <div id='article-content'>
+          <NotionRenderer
+            recordMap={articleBlocks}
+            fullPage={false}
+            darkMode={false}
+            showTableOfContents
+            disableHeader
+            showCollectionViewDropdown={false}
+            // rootDomain
+            previewImages
+            className={styles.content}
+            components={{
+              equation: Equation,
+              code: Code,
+              collection: Collection, 
+              collectionRow: CollectionRow
+            }}
+          />
+        </div>
+        )
     }
   </div>
 }
