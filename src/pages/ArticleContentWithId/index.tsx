@@ -5,8 +5,8 @@ import { getNotionArticleRecordMaps } from '@/api'
 import { NotionRenderer, Equation, Collection, CollectionRow } from 'react-notion-x'
 import Code from '@/Components/Code'
 import 'react-notion-x/src/styles.css'
-import styles from '../ArticleContent/styles.module.less'
-import '../ArticleContent/rewriteNotionXStyle.less'
+import styles from './style.module.less'
+import './rewriteNotionXStyle.less'
 import { combineClassNames } from '@/utils/style';
 import Skeleton from '@/Components/Skeleton';
 import { ArticleInfo } from '@/store/type';
@@ -71,13 +71,6 @@ export default function ArticleContent() {
         styles.loadingSkeleton_footer
       )
     } showSkeleton={isLoading} />
-    {
-      !isLoading &&
-      articleBlocks && 
-      <h2 className={styles.title}>
-        {articleInfo?.title}
-      </h2>
-    }
     {
       !isLoading &&
       ( articleBlocks &&
