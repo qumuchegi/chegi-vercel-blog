@@ -1,5 +1,5 @@
 import { useMemo, Suspense } from 'react'
-import {  BrowserRouter as Router, Route, Switch, NavLink, useRouteMatch } from 'react-router-dom'
+import {  BrowserRouter as Router, Route, Switch, NavLink, useRouteMatch, Redirect } from 'react-router-dom'
 import { Transition, TransitionGroup } from 'react-transition-group'
 import { RouteItem } from '../types'
 
@@ -23,6 +23,7 @@ export function useRenderRouteContent(
           timeout={{enter: 750, exit: 150}}
         >
           <Switch>
+            <Redirect exact from='/' to='/home' />
             {
               routes.map(
                 ({

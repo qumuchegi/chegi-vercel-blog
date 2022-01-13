@@ -1,12 +1,12 @@
 import React, { lazy, useCallback } from 'react'
 import { RouteItem } from '../types'
-import ArticleRoute from './article'
+import ArticleRoute, { RenderArticleWithNotionId } from './article'
 import { Loadable } from '../render'
 import { useHistory } from 'react-router-dom'
 
 const WelcomeRoute: RouteItem = {
   title: 'welcome page',
-  path: '/',
+  path: '/home',
   exact: true,
   component: <Loadable
     LazyComponent={
@@ -20,7 +20,7 @@ const WelcomeRoute: RouteItem = {
 }
 const HomeRoute: RouteItem = {
   title: `chegi's blog`,
-  path: '/',
+  path: '/home',
   component: 
     <Loadable
       LazyComponent={
@@ -40,7 +40,7 @@ export const useNaviToHome = () => {
   const history =  useHistory()
   return useCallback(
     () => {
-      history.push('/')
+      history.push('/home')
     },
     [history]
   )

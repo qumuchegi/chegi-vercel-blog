@@ -5,14 +5,11 @@ import { getNotionArticleRecordMaps } from '@/api'
 import { NotionRenderer, Equation, Collection, CollectionRow } from 'react-notion-x'
 import Code from '@/Components/Code'
 import 'react-notion-x/src/styles.css'
-import styles from './styles.module.less'
-import './rewriteNotionXStyle.less'
-import Loading from '@/Components/Loading';
+import styles from '../ArticleContent/styles.module.less'
+import '../ArticleContent/rewriteNotionXStyle.less'
 import { combineClassNames } from '@/utils/style';
 import Skeleton from '@/Components/Skeleton';
 import { ArticleInfo } from '@/store/type';
-import { useLazyImgLoading, useRewriteAnchors } from '@/hooks'
-import { useNaviToArticleContentWithSingleId } from '@/routes/category/article';
 
 export default function ArticleContent() {
   const params: { articleId: string } = useParams()
@@ -44,7 +41,7 @@ export default function ArticleContent() {
   }, [fetchArticleContent])
   useEffect(() => {
     const _articleInfo = getArticleInfo(params.articleId) || {}
-    window.document.title = _articleInfo.title
+    // window.document.title = _articleInfo.title
     setArticleInfo(_articleInfo)
   }, [params, getArticleInfo])
   useEffect(() => {
@@ -54,32 +51,7 @@ export default function ArticleContent() {
       behavior: 'smooth'
     })
   }, [params])
-  // useLazyImgLoading({
-  //   //@ts-ignore
-  //   container: document.getElementById('article-content')
-  // })
-  const navoToArticleWithSingleId = useNaviToArticleContentWithSingleId()
-  useRewriteAnchors(
-    'article-content',
-    {
-      // href: (value) => {
-      //   if (/^http/.test(value)) {
-      //     return value
-      //   }
-      //   return 'https://chegi.notion.site' + value
-      // },
-      onclick: () => 'return false'
-    },
-    isLoading,
-    useCallback((href) => {
-      console.log(href)
-      const artucleId = href.replace('/', '')
-      changeSelectedArticle(artucleId)
-      navoToArticleWithSingleId({
-        articleId: artucleId
-      })
-    }, [navoToArticleWithSingleId, changeSelectedArticle])
-  )
+
   return <div className={styles.contentContainer}>
     <Skeleton className={
       combineClassNames(
@@ -116,6 +88,7 @@ export default function ArticleContent() {
             darkMode={false}
             showTableOfContents
             disableHeader
+            rootDomain='https://chegi.notion.site/'
             showCollectionViewDropdown={false}
             // rootDomain
             previewImages

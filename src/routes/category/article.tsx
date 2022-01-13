@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom'
 
 const ArticlContentRoue: RouteItem = {
   title: 'article content',
-  path: '/article-list/:tabId/article-content/:articleId',
+  path: '/home/article-list/:tabId/article-content/:articleId',
   component: <Loadable
     LazyComponent={
       lazy(
@@ -16,9 +16,22 @@ const ArticlContentRoue: RouteItem = {
     }
   />
 }
+export const RenderArticleWithNotionId: RouteItem = {
+  title: 'notion article content',
+  path: '/notion-article/:articleId',
+  component: <Loadable
+    LazyComponent={
+      lazy(
+        () => import(
+          /*Article content */ '@/pages/ArticleContentWithId'
+        )
+      )
+    }
+  />
+}
 const ArticleRoute: RouteItem = {
   title: 'articlelist',
-  path: '/article-list/:tabId',
+  path: '/home/article-list/:tabId',
   component: <Loadable
     LazyComponent={
       lazy(
@@ -43,7 +56,7 @@ export const useNaviToArticleList = () => {
         tabId: string
       }
     ) => {
-      history.push('/article-list/' + params?.tabId)
+      history.push('/home/article-list/' + params?.tabId)
     },
     [history]
   )
@@ -57,9 +70,23 @@ export const useNaviToArticleDetail = () => {
         articleId: string
       }
     ) => {
-      history.push(`/article-list/${params?.tabId}/article-content/${params?.articleId}`)
+      history.push(`/home/article-list/${params?.tabId}/article-content/${params?.articleId}`)
     },
     [history]
   )
 }
+export const useNaviToArticleContentWithSingleId = () => {
+  const history =  useHistory()
+  return useCallback(
+    (
+      params: {
+        articleId: string
+      }
+    ) => {
+      history.push(`/notion-article/${params?.articleId}`)
+    },
+    [history]
+  )
+}
+
 export default ArticleRoute
