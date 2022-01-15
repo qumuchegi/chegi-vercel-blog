@@ -30,7 +30,7 @@ export default function Home() {
       changeSelectedArticle(null)
     }
     openBottomSheetArticleList(articleList)
-  }, [toArticleList, changeSelectedTab, changeSelectedArticle])
+  }, [toArticleList, changeSelectedTab, changeSelectedArticle, selectedTab])
 
   const tabs = useMemo(() => {
     if (tabNames.length) {
