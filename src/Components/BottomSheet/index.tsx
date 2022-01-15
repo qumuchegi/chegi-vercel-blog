@@ -42,24 +42,26 @@ function BottomSheet(
     combineClassNames(
       styles.outerContainer,
       containerStyleClassName
-    )}>
-  <div className={styles.container}>
-    <div className={styles.background} onClick={onRequestClose} onScroll={() => {return false}}/>
-    <div className={styles.bottomSheet}>
-      <div className={styles.header}>
-        {
-          header
-          ?? <div className={styles.line}></div>
-        }
-      </div>
-      <div className={
-        combineClassNames(
-          styles.content
-        )
-      }>
-        {children}
+    )}
+    >
+    <div className={styles.container}>
+      <div className={styles.background} onClick={onRequestClose}/>
+      <div className={styles.bottomSheet}>
+        <div className={styles.header} onClick={onRequestClose}>
+          {
+            header
+            ?? <div className={styles.line} onClick={() => {}}></div>
+          }
+        </div>
+        <div className={
+          combineClassNames(
+            styles.content
+          )
+        } 
+        >
+          {children}
+        </div>
       </div>
     </div>
-  </div>
   </div>
 }

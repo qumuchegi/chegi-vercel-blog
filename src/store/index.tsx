@@ -1,4 +1,5 @@
-import React, { useReducer, useContext, createContext, useCallback, useMemo } from 'react'
+import BottomSheet, { BottomSheetHandle } from '@/Components/BottomSheet'
+import React, { useReducer, useContext, createContext, useCallback, useMemo, useRef, useState } from 'react'
 import { ArticleInfo, Store, TabArticles } from './type'
 
 const defaultContextValue: Store = {
@@ -10,6 +11,7 @@ const defaultContextValue: Store = {
     actions: {
       changeSelectedTab: (tabName: string) => { },
       changeSelectedArticle: (articleId: string) => { },
+      setBottomSheetChildren: (bottomSheetChild: JSX.Element) => {}
     }
   },
   articles: {
@@ -54,6 +56,8 @@ const rootReducer = (state: Store = defaultContextValue, action: Action) => {
 }
 const ConnectStore = ({ children }: { children: React.ReactChild }) => {
   const [store, dispatch] = useReducer(rootReducer, defaultContextValue)
+  const bottomSheetRef = useRef<BottomSheetHandle>()
+  const [bottomSheetChildren, setBottomSheetChildren] = useState<JSX.Element | undefined>()
   const recordTabBlogs = useCallback(
     (tabArticles: TabArticles) => {
       dispatch({
@@ -98,6 +102,10 @@ const ConnectStore = ({ children }: { children: React.ReactChild }) => {
         return articleId === _articleId
     }) || null
   }, [store?.articles])
+  const openBottomSeet = useCallback((child?: JSX.Element) => {
+    bottomSheetRef.current?.open()
+    setBottomSheetChildren(child)
+  }, [])
   return <storeContext.Provider value={
     useMemo(() => ({
       ...store,
@@ -106,7 +114,8 @@ const ConnectStore = ({ children }: { children: React.ReactChild }) => {
         isNarrowDevice: (window.screen.availWidth < 768),
         actions: {
           changeSelectedTab,
-          changeSelectedArticle
+          changeSelectedArticle,
+          setBottomSheetChildren: openBottomSeet
         }
       },
       articles: {
@@ -117,9 +126,21 @@ const ConnectStore = ({ children }: { children: React.ReactChild }) => {
           getArticleInfo
         }
       }
-    }), [recordTabBlogs, store, getArticleInfo, changeSelectedTab, changeSelectedArticle])
+    }), [recordTabBlogs, store, getArticleInfo, changeSelectedTab, changeSelectedArticle, openBottomSeet])
   }>
-    {children}
+    <div style={{
+      width: '100vw',
+      height: '100vh',
+      overflow: 'scroll'
+    }}>
+     {children}
+    </div>
+    {
+      (window.screen.availWidth < 768)
+      &&  <BottomSheet ref={bottomSheetRef}>
+        {bottomSheetChildren}
+      </BottomSheet>
+    }
   </storeContext.Provider>
 }
 
