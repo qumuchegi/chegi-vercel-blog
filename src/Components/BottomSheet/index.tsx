@@ -20,15 +20,18 @@ function BottomSheet(
   ref: any
 ) {
   const [containerStyleClassName, toogleContainerStyleClassName] = useState<string>(styles.close)
+  const [bgStyleClassName, toogleBgStyleClassName] = useState<string>(styles.closeBg)
   const onRequestClose = useCallback(
     () => {
       toogleContainerStyleClassName(styles.close)
+      toogleBgStyleClassName(styles.openBg)
     },
     []
   )
   const onRequestOpen = useCallback(
     () => {
       toogleContainerStyleClassName(styles.open)
+      toogleBgStyleClassName(styles.closeBg)
     },
     []
   )
@@ -45,7 +48,12 @@ function BottomSheet(
     )}
     >
     <div className={styles.container}>
-      <div className={styles.background} onClick={onRequestClose}/>
+      <div className={
+        combineClassNames(
+          styles.background,
+          bgStyleClassName
+        )
+      } onClick={onRequestClose}/>
       <div className={styles.bottomSheet}>
         <div className={styles.header} onClick={onRequestClose}>
           {

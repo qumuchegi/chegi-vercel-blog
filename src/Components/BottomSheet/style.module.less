@@ -31,7 +31,15 @@
       bottom: 0;
       position: absolute;
       z-index: 100;
-      background-color: rgba(0,0,0,.2);
+      background-color: rgb(0,0,0);
+      &.openBg{
+        opacity: 0;
+        transition: opacity .5s;
+      }
+      &.closeBg{
+        opacity: 0.2;
+        transition: opacity .5s;
+      }
     }
     .bottomSheet{
       // background-color: #fff;
