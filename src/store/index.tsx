@@ -134,13 +134,13 @@ const ConnectStore = ({ children }: { children: React.ReactChild }) => {
       overflow: 'scroll'
     }}>
      {children}
+     {
+        (window.screen.availWidth < 768)
+        &&  <BottomSheet ref={bottomSheetRef}>
+          {bottomSheetChildren}
+        </BottomSheet>
+      }
     </div>
-    {
-      (window.screen.availWidth < 768)
-      &&  <BottomSheet ref={bottomSheetRef}>
-        {bottomSheetChildren}
-      </BottomSheet>
-    }
   </storeContext.Provider>
 }
 
