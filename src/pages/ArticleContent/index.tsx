@@ -63,16 +63,26 @@ export default function ArticleContent() {
     'article-content',
     {
       // href: (value) => {
-      //   if (/^http/.test(value)) {
+      //   const outSiteLink = /^http/.test(value)
+      //   if (outSiteLink) {
       //     return value
       //   }
       //   return 'https://chegi.notion.site' + value
       // },
-      onclick: () => 'return false'
+      onclick: (_, anchor) => {
+        const outSiteLink = /^http/.test(anchor.getAttribute('href') ?? '')
+        if (outSiteLink) {
+        } else {
+          return 'return false'
+        }
+      }
     },
     isLoading,
-    useCallback((href) => {
-      console.log(href)
+    useCallback((href, anchor) => {
+      const outSiteLink = /^http/.test(anchor.getAttribute('href') ?? '')
+      if (outSiteLink) {
+        return
+      }
       const artucleId = href.replace('/', '')
       changeSelectedArticle(artucleId)
       navoToArticleWithSingleId({
