@@ -11,15 +11,20 @@
   justify-content: space-between;
   .title {
     font-family: "Bradley Hand", cursive;
-    font-size: 4rem;
+    @media screen and (max-width: 768px) {
+      font-size: 2rem;
+    }
+    @media screen and (min-width: 768px) {
+      font-size: 4rem;
+    }
     &:hover {
       cursor: pointer;
     }
   }
   padding: 10px 20px;
   height: 5rem;
-  backdrop-filter: opacity(20%);
-  // background-color: #fff;
+  // backdrop-filter: opacity(20%);
+  background-color: #fff;
 }
 .hideAvatar {
   position: sticky;

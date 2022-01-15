@@ -3,9 +3,10 @@ import { useNaviToArticleDetail } from '@/routes/category/article'
 import { useStore } from '@/store'
 import { ArticleInfo } from '@/store/type'
 import { combineClassNames } from '@/utils/style'
-import React, { useRef, useState, useEffect, useMemo, useCallback } from 'react'
+import React, { useRef, useState, useEffect, useMemo, useCallback, createRef } from 'react'
 import { useParams } from 'react-router-dom'
 import styles from './styles.module.less'
+import BottomSheet, { BottomSheetHandle } from '@/Components/BottomSheet'
 
 export default function ArticleList() {
   const params: {tabId: string} = useParams()
@@ -17,7 +18,7 @@ export default function ArticleList() {
   const selectedArticleId = useStore(state => state.uiState.selectedArticleId)
   const changeSelectedArticle = useStore(state => state.uiState.actions.changeSelectedArticle)
   const hadAutoSelec = useRef(false)
-  const [isOpenListDetail, setIsOpenListDetail] = useState<boolean>(false)
+  const articleListBottomSheet = createRef<BottomSheetHandle>()
   useEffect(() => {
     if (hadAutoSelec.current) {
       return
@@ -25,11 +26,14 @@ export default function ArticleList() {
     changeSelectedTab(params.tabId)
     hadAutoSelec.current = true
   }, [params])
+  useEffect(() => {
+    articleListBottomSheet.current?.open()
+  }, [params.tabId, selectedArticleId])
   const openListDetail = useCallback(() => {
     if (!isNarrowDevice) {
       return
     }
-    setIsOpenListDetail(true)
+    articleListBottomSheet.current?.open()
   },  [isNarrowDevice])
   useEffect(() => {
     openListDetail()
@@ -42,6 +46,7 @@ export default function ArticleList() {
         tabId: selectedTab,
         articleId: articleId
       })
+      articleListBottomSheet.current?.close()
       changeSelectedArticle(articleId)
     },
     [changeSelectedArticle, selectedTab]
@@ -91,10 +96,13 @@ export default function ArticleList() {
     ]}/> */}
     {
       isNarrowDevice ?
-        <details open={isOpenListDetail}>
-          <summary className={styles.listSummary}>article list</summary>
-          <p>{articleList}</p>
-        </details>
+        <BottomSheet ref={articleListBottomSheet}>
+          {articleList}
+        </BottomSheet>
+        // <details open={isOpenListDetail}>
+        //   <summary className={styles.listSummary}>article list</summary>
+        //   <p>{articleList}</p>
+        // </details>
         : articleList
     }
   </div>
