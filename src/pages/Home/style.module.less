@@ -1,29 +1,26 @@
 .tabContainer {
+  z-index: 2;
   margin-top: 0;
   display: flex;
   padding-top: 1rem;
   height: 3rem;
-  // z-index: 10;
   justify-content: flex-start;
   align-items: flex-start;
   font-family: sans-serif;
   font-weight: bold;
-  margin-left: 20px;
-  max-width: calc(100% - 40px);
+  // margin-left: 20px;
   overflow-x: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  background-color: #fff;
+  background-color: white;
   width: 100vw;
+  font-size: 1.5rem;
+  position: sticky;
+  top: 0px;
   @media screen and (max-width: 768px) {
-    font-size: .7rem;
+    box-shadow: 5px 5px 5px #bbb;
   }
-  @media screen and (min-width: 768px) {
-    font-size: 1.5rem;
-    position: sticky;
-    padding-top: 20px;
-    top: 0px;
-  }
+
   &::-webkit-scrollbar {
     display: none;
   }
@@ -35,11 +32,11 @@
   }
   .tabItem:hover {
     cursor: pointer;
-    text-decoration: underline;
+    // text-decoration: underline;
   }
   .selectedtabItem {
     color: rgb(63, 188, 219);
-    text-decoration: underline;
+    // text-decoration: underline;
   }
   .tabSkeleton {
     width: 70px;
