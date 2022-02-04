@@ -1,6 +1,8 @@
-import BottomSheet, { BottomSheetHandle } from '@/Components/BottomSheet'
+// import BottomSheet, { BottomSheetHandle } from '@/Components/BottomSheet'
 import React, { useReducer, useContext, createContext, useCallback, useMemo, useRef, useState } from 'react'
 import { ArticleInfo, Store, TabArticles } from './type'
+import { BottomSheet, BottomSheetRef as BottomSheetHandle } from 'react-spring-bottom-sheet'
+import 'react-spring-bottom-sheet/dist/style.css'
 
 const defaultContextValue: Store = {
   uiState: {
@@ -11,7 +13,8 @@ const defaultContextValue: Store = {
     actions: {
       changeSelectedTab: (tabName: string) => { },
       changeSelectedArticle: (articleId: string) => { },
-      setBottomSheetChildren: (bottomSheetChild: JSX.Element) => {}
+      setBottomSheetChildren: (bottomSheetChild: JSX.Element) => {},
+      closeBottomSheet: () => { }
     }
   },
   articles: {
@@ -56,7 +59,9 @@ const rootReducer = (state: Store = defaultContextValue, action: Action) => {
 }
 const ConnectStore = ({ children }: { children: React.ReactChild }) => {
   const [store, dispatch] = useReducer(rootReducer, defaultContextValue)
+  const [isOpenBottomSheet, setIsOpenBottomSheet] = useState<boolean>(false)
   const bottomSheetRef = useRef<BottomSheetHandle>()
+  const [bottomSheetHeader, setBottomSheetHeader] = useState<JSX.Element | undefined>()
   const [bottomSheetChildren, setBottomSheetChildren] = useState<JSX.Element | undefined>()
   const recordTabBlogs = useCallback(
     (tabArticles: TabArticles) => {
@@ -102,9 +107,10 @@ const ConnectStore = ({ children }: { children: React.ReactChild }) => {
         return articleId === _articleId
     }) || null
   }, [store?.articles])
-  const openBottomSeet = useCallback((child?: JSX.Element) => {
-    bottomSheetRef.current?.open()
+  const openBottomSeet = useCallback((child?: JSX.Element, header?: JSX.Element) => {
+    setIsOpenBottomSheet(true)
     setBottomSheetChildren(child)
+    setBottomSheetHeader(header)
   }, [])
   return <storeContext.Provider value={
     useMemo(() => ({
@@ -115,7 +121,10 @@ const ConnectStore = ({ children }: { children: React.ReactChild }) => {
         actions: {
           changeSelectedTab,
           changeSelectedArticle,
-          setBottomSheetChildren: openBottomSeet
+          setBottomSheetChildren: openBottomSeet,
+          closeBottomSheet: () => {
+            setIsOpenBottomSheet(false)
+          }
         }
       },
       articles: {
@@ -128,15 +137,20 @@ const ConnectStore = ({ children }: { children: React.ReactChild }) => {
       }
     }), [recordTabBlogs, store, getArticleInfo, changeSelectedTab, changeSelectedArticle, openBottomSeet])
   }>
-    <div style={{
-      width: '100vw',
-      height: '100vh',
-      overflow: 'scroll'
-    }}>
+    <div>
      {children}
      {
         (window.screen.availWidth < 768)
-        &&  <BottomSheet ref={bottomSheetRef}>
+        &&  <BottomSheet
+          //@ts-ignore
+          ref={bottomSheetRef}
+          snapPoints={({ minHeight, maxHeight }) => [minHeight, maxHeight / 0.6]}
+          header={bottomSheetHeader}
+          onDismiss={useCallback(() => {
+            setIsOpenBottomSheet(false)
+          }, [])}
+          open={isOpenBottomSheet}
+        >
           {bottomSheetChildren}
         </BottomSheet>
       }

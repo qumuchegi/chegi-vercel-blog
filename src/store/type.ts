@@ -24,7 +24,8 @@ export type Store = {
     actions: {
       changeSelectedTab: (tabName: string) => void
       changeSelectedArticle: (articleId: string) => void
-      setBottomSheetChildren: (bottomSheetChild: JSX.Element) => void
+      setBottomSheetChildren: (bottomSheetChild: JSX.Element, header?: JSX.Element) => void
+      closeBottomSheet: () => void
     }
   },
   articles: {

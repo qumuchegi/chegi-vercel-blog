@@ -1,5 +1,5 @@
 import { combineClassNames } from '@/utils/style'
-import React, { useState, useImperativeHandle, forwardRef, useCallback } from 'react'
+import React, { useState, useImperativeHandle, forwardRef, useCallback, useRef, useEffect } from 'react'
 import styles from './style.module.less'
 
 interface IProps {
@@ -19,6 +19,7 @@ function BottomSheet(
   }: IProps,
   ref: any
 ) {
+  const containerRef = useRef<HTMLDivElement>(null)
   const [containerStyleClassName, toogleContainerStyleClassName] = useState<string>(styles.close)
   const [bgStyleClassName, toogleBgStyleClassName] = useState<string>(styles.closeBg)
   const onRequestClose = useCallback(
@@ -46,6 +47,7 @@ function BottomSheet(
       styles.outerContainer,
       containerStyleClassName
     )}
+    ref={containerRef}
     >
     <div className={styles.container}>
       <div className={

@@ -5,8 +5,8 @@ import { useStore } from '@/store'
 import { combineClassNames } from '@/utils/style'
 import { repeatArr } from '@/utils/array'
 import Skeleton from '@/Components/Skeleton'
-import ArticleList from '@/pages/ArticleList'
 import ArticlList from '../ArticleList/list'
+import { useBottomSheet } from '@/store/hooks'
 
 export default function Home() {
   const toArticleList = useNaviToArticleList()
@@ -15,6 +15,10 @@ export default function Home() {
   const changeSelectedArticle = useStore(state => state.uiState.actions.changeSelectedArticle)
   const selectedTab = useStore(state => state.uiState.selectedTab)
   const openBottomSheetArticleList = useStore(state => state.uiState.actions.setBottomSheetChildren)
+  const {
+    open: openBottomSeet,
+    close: closeBottomSheet
+   } = useBottomSheet()
   const tabNames = useMemo(() => tabArticles ? Object.keys(tabArticles) : [], [tabArticles])
   const toArticleDetail = useNaviToArticleDetail() // { articleId: '12' }
 
@@ -29,8 +33,8 @@ export default function Home() {
       toArticleList({ tabId: tabName })
       changeSelectedArticle(null)
     }
-    openBottomSheetArticleList(articleList)
-  }, [toArticleList, changeSelectedTab, changeSelectedArticle, selectedTab])
+    openBottomSeet(articleList, <h2>{tabName}</h2>)
+  }, [toArticleList, changeSelectedTab, changeSelectedArticle, selectedTab, openBottomSeet])
 
   const tabs = useMemo(() => {
     if (tabNames.length) {
