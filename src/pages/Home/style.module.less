@@ -3,7 +3,7 @@
   margin-top: 0;
   position: sticky;
   top: 0px;
-  background-color: rgb(235, 35, 35);
+  background-color: rgb(235, 29, 91);
   border-bottom: solid 1px #bbb;
   height: 3rem;
   overflow-y: hidden;
@@ -16,9 +16,10 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    color: rgb(235, 35, 35);
+    color: rgb(235, 29, 91);
     font-family: 'YouYuan';
     font-weight: bold;
+    text-align: center;
   }
   .up {
     transform: translateY(-3rem);
@@ -48,14 +49,18 @@
     }
     .tabItem {
       padding: 0 10px 0 10px;
-      margin-right: 20px;
+      margin-right: 10px;
+      margin-left: 10px;
+      color: #fff;
+      border-radius: 4px;
     }
     .tabItem:hover {
       cursor: pointer;
       // text-decoration: underline;
     }
     .selectedtabItem {
-      color: #fff;
+      background-color: #fff;
+      color: rgb(235, 29, 91);
       // text-decoration: underline;
     }
     .tabSkeleton {
