@@ -9,19 +9,23 @@ import ArticlList from '../ArticleList/list'
 import { useBottomSheet } from '@/store/hooks'
 
 export default function Home() {
+  const [showArticleTitle, setShowArticleTitle] = useState(false)
   const toArticleList = useNaviToArticleList()
   const tabArticles = useStore(state => state.articles.tabArticles)
   const changeSelectedTab = useStore(state => state.uiState.actions.changeSelectedTab)
   const changeSelectedArticle = useStore(state => state.uiState.actions.changeSelectedArticle)
   const selectedTab = useStore(state => state.uiState.selectedTab)
-  const openBottomSheetArticleList = useStore(state => state.uiState.actions.setBottomSheetChildren)
   const {
     open: openBottomSeet,
     close: closeBottomSheet
    } = useBottomSheet()
   const tabNames = useMemo(() => tabArticles ? Object.keys(tabArticles) : [], [tabArticles])
   const toArticleDetail = useNaviToArticleDetail() // { articleId: '12' }
-
+  const selectedArticleId = useStore(state => state.uiState.selectedArticleId)
+  const getArticleInfo = useStore(state => state.articles.actions.getArticleInfo)
+  const articleTitle = useMemo(() => {
+    return getArticleInfo(selectedArticleId)?.title
+  }, [getArticleInfo,selectedArticleId ])
   const articleList = <div>
     <ArticlList  toArticleDetail={toArticleDetail}/>
   </div>
@@ -61,9 +65,44 @@ export default function Home() {
     }
   }, [tabNames, selectedTab, onPressTab])
 
-  return <div className={styles.tabContainer}>
+  const lastScrollTop = useRef(0)
+  const handleScroll = useCallback(() => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+    if (scrollTop > lastScrollTop.current) {
+      // down
+      setShowArticleTitle(true)
+    } else {
+      // up
+      setShowArticleTitle(false)
+    }
+    lastScrollTop.current = scrollTop
+  }, [])
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [handleScroll])
+  return <div className={styles.container}>
+    <div className={
+      combineClassNames(
+        styles.tabContainer,
+        showArticleTitle 
+        ? styles.up
+        : styles.down
+      )
+    }>
     {
       tabs
     }
+    </div>
+    <div className={
+      combineClassNames(
+        styles.articleTitle,
+        showArticleTitle 
+        ? styles.up
+        : styles.down
+      )
+    }>{articleTitle}</div>
   </div>
 }
