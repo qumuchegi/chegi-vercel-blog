@@ -68,12 +68,12 @@ export default function Home() {
   const lastScrollTop = useRef(0)
   const handleScroll = useCallback(() => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop
-    if (scrollTop > lastScrollTop.current) {
+    if (scrollTop < lastScrollTop.current || scrollTop === 0) {
       // down
-      setShowArticleTitle(true)
+      setShowArticleTitle(false)
     } else {
       // up
-      setShowArticleTitle(false)
+      setShowArticleTitle(true)
     }
     lastScrollTop.current = scrollTop
   }, [])
