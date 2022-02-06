@@ -1,18 +1,19 @@
 .contentContainer {
   padding: 20px 0;
-  @media screen and (max-width: 768px) {
-    width: calc(100vw - 40px) ;
-  }
-  @media screen and (min-width: 768px) {
-    width: calc(100vw - 20rem + 20px - 80px);
-    margin-left: 30px;
-  }
+  // @media screen and (min-width: 768px) {
+  //   width: calc(100vw - 20rem + 20px - 80px);
+  //   margin-left: 30px;
+  // }
   .content {
+    padding: 5px;
+    margin: 0;
     font-family: 'Hannotate SC', 'Kalam_Regular';
     line-height: 1.8rem;
-   
+
     @media screen and (max-width: 768px) {
-      width: calc(100vw) ;
+      width: calc(100vw - 10px) ;
+      word-break:break-all;
+      overflow: auto;
     }
     @media screen and (min-width: 768px) {
       width: calc(100vw - 20rem + 20px - 80px) / 1.5 ;
