@@ -5,10 +5,11 @@ export type ArticleInfo = {
   lastEditedTime: string
   title: string
   tag: {
-    id: string
-    name: string
-    color: string
-  }[],
+    multi_select: {
+      id: string
+      name: string
+    }[]
+  },
   content?: string
 }
 

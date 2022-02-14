@@ -34,7 +34,7 @@ export default function ArticlList(
     },
     [selectedTab, toArticleDetail, closeBottomSheet]
   )
-
+  console.log({articles});
   return <div style={{padding: '10px'}}>
     { articles
       ?.map((article: ArticleInfo) => {
@@ -50,7 +50,19 @@ export default function ArticlList(
             onSelectArticle(article.articleId)
           }}
         >
-          <div>{article.title}</div>
+          <div className={styles.title}>{article.title}</div>
+          {/* <div className={styles.tagContainer}>
+            {
+              article.tag?.multi_select?.map(({
+                id,
+                name,
+              }) => {
+                return <div key={id} className={styles.tagItem}>
+                  {name}
+                </div>
+              })
+            }
+          </div> */}
         </div>
       })
     }
