@@ -1,3 +1,4 @@
+
 body {
   margin: 0;
   padding: 0;
@@ -30,39 +31,47 @@ code {
 @font-face {
   font-family: 'Oooh Baby';
   src:  url('./assets/font/Oooh_Baby/OoohBaby-Regular.ttf');
+  font-display: fallback;
 }
 
 @font-face {
   font-family: 'Long_Cang';
   src:  url('./assets/font/Long_Cang//LongCang-Regular.ttf');
+  font-display: fallback;
 }
 
 @font-face {
   font-family: 'ZCOOL_KuaiLe';
   src:  url('./assets/font/ZCOOL_KuaiLe/ZCOOLKuaiLe-Regular.ttf');
+  font-display: fallback;
 }
 
 @font-face {
   font-family: 'ZCOOL XiaoWei';
   src:  url('./assets/font/ZCOOL_XiaoWei/ZCOOLXiaoWei-Regular.ttf');
+  font-display: fallback;
 }
 
 @font-face {
   font-family: 'Kalam_Light';
   src:  url('./assets/font/Kalam/Kalam-Light.ttf');
+  font-display: fallback;
 }
 
 @font-face {
   font-family: 'Kalam_Regular';
   src:  url('./assets/font/Kalam/Kalam-Regular.ttf');
+  font-display: fallback;
 }
 
 @font-face {
   font-family: 'Kalam_Bold';
   src:  url('./assets/font/Kalam/Kalam-Bold.ttf');
+  font-display: fallback;
 }
 
-/* @font-face {
+@font-face {
   font-family: 'YouYuan';
-  src: url('./assets/font/QingNingYouYuan-2.ttf')
-} */
+  src: url('./assets/font/QingNingYouYuan-2.ttf');
+  font-display: fallback;
+}
