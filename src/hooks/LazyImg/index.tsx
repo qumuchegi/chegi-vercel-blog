@@ -8,9 +8,6 @@ export function useLazyImgLoading({
   container
 }: Props) {
   useEffect(() => {
-    console.log({
-      container
-    });
     if (!container) {
       return
     }
