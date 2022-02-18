@@ -34,7 +34,7 @@ export default function ArticlList(
     },
     [selectedTab, toArticleDetail, closeBottomSheet]
   )
-  console.log({articles});
+
   return <div style={{padding: '10px'}}>
     { articles
       ?.map((article: ArticleInfo) => {
