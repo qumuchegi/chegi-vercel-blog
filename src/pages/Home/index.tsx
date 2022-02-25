@@ -7,8 +7,11 @@ import { repeatArr } from '@/utils/array'
 import Skeleton from '@/Components/Skeleton'
 import ArticlList from '../ArticleList/list'
 import { useBottomSheet } from '@/store/hooks'
+import icMore from '@/assets/img/more.png'
 
 export default function Home() {
+  const [isMoreIconVisible, setIsMoreIconVisible] = useState(false)
+  const headerRef = useRef<any>()
   const [showArticleTitle, setShowArticleTitle] = useState(false)
   const toArticleList = useNaviToArticleList()
   const tabArticles = useStore(state => state.articles.tabArticles)
@@ -83,7 +86,10 @@ export default function Home() {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [handleScroll])
-  return <div className={styles.container}>
+  useEffect(() => {
+    setIsMoreIconVisible(headerRef.current?.scrollWidth > headerRef.current?.clientWidth)
+  }, [])
+  return <div className={styles.container} ref={headerRef}>
     <div className={
       combineClassNames(
         styles.tabContainer,
@@ -92,9 +98,10 @@ export default function Home() {
         : styles.down
       )
     }>
-    {
-      tabs
-    }
+      {
+        tabs
+      }
+      {/* <img src={icMore} className={styles.moreIcon}/> */}
     </div>
     <div className={
       combineClassNames(

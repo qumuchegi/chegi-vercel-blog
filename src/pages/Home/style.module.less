@@ -1,13 +1,19 @@
 @import "../../style/font.less";
 
 .container {
-  z-index: 100;
+  @media screen and (max-width: 768px) {
+    z-index: 3;
+  }
+  @media screen and (min-width: 768px) {
+    z-index: 100;
+  }
   margin-top: 0;
   position: sticky;
   top: 0px;
-  box-shadow: 0 10px 15px 0 rgb(0 0 0 / 20%);
+  box-shadow: 0 9px 9px 0 rgb(0 0 0 / 20%);
   height: 3rem;
   overflow-y: hidden;
+  white-space: nowrap;
   .articleTitle {
     height: 3rem;
     margin: 0;
@@ -31,6 +37,7 @@
     transition: transform .5s;
   }
   .tabContainer {
+    position: relative;
     background-color: white;
     display: flex;
     // padding: 10px;
@@ -46,6 +53,15 @@
     width: 100vw;
     font-size: 1.2rem;
     margin: 0;
+    .moreIcon {
+      background-color: white;
+      width: 3rem;
+      height: 3rem;
+      position: absolute;
+      
+      right: 0;
+      top: 0
+    }
     &::-webkit-scrollbar {
       display: none;
     }
