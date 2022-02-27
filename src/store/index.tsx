@@ -137,24 +137,21 @@ const ConnectStore = ({ children }: { children: React.ReactChild }) => {
       }
     }), [recordTabBlogs, store, getArticleInfo, changeSelectedTab, changeSelectedArticle, openBottomSeet])
   }>
-    <div>
-     {children}
-     {
-        (window.screen.availWidth < 768)
-        &&  <BottomSheet
-          //@ts-ignore
-          ref={bottomSheetRef}
-          snapPoints={({ minHeight, maxHeight }) => [minHeight, maxHeight / 0.6]}
-          header={bottomSheetHeader}
-          onDismiss={useCallback(() => {
-            setIsOpenBottomSheet(false)
-          }, [])}
-          open={isOpenBottomSheet}
-        >
+    {
+      (window.screen.availWidth < 768)
+      ? <div style={{
+        width: '100vw',
+        height: '100vh',
+        overflow: 'scroll'
+      }}>
+       {children}
+       {/* @ts-ignore */}
+       <BottomSheet ref={bottomSheetRef}>
           {bottomSheetChildren}
         </BottomSheet>
-      }
-    </div>
+      </div>
+      : children
+    }
   </storeContext.Provider>
 }
 
