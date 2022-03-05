@@ -137,6 +137,15 @@ export default function ArticleContent() {
               collectionRow: CollectionRow
             }}
           />
+          {/* 评论组件 */}
+          <h4>评论</h4>
+          <iframe
+            src={`https://blog-comment-mocha.vercel.app/?articleId=${params.articleId}`}
+            style={{
+              width: '100%',
+              height: '100%'
+            }}
+            />
         </div>
         )
     }
