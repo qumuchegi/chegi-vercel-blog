@@ -143,9 +143,11 @@ export default function ArticleContent() {
             src={`https://blog-comment-mocha.vercel.app/?articleId=${params.articleId}`}
             style={{
               width: '100%',
-              height: '100%'
+              border: '0px'
             }}
-            />
+            frameBorder='0'
+            scrolling='no'
+          />
         </div>
         )
     }
