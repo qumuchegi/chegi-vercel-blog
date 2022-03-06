@@ -139,18 +139,20 @@ export default function ArticleContent() {
             }}
           />
           {/* 评论组件 */}
-          <h3>评论</h3>
+          <h3 style={{marginLeft: '20px'}}>评论</h3>
           <iframe
             src={`https://blog-comment-mocha.vercel.app/?articleId=${params.articleId}`}
+            id='comment-iframe'
             style={{
               width: '100%',
               minHeight: '600px',
               maxHeight: '800px',
               border: '0px',
-              scrollbarWidth: 'none'
+              scrollbarWidth: 'none',
+              paddingBottom: '30px'
             }}
             frameBorder='0'
-            // scrolling='no'
+            scrolling='no'
           />
         </div>
         )
