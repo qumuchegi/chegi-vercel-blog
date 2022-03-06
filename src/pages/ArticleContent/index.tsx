@@ -1,5 +1,5 @@
 import { useStore } from '@/store';
-import React, { useRef, useState, useEffect, useCallback } from 'react'
+import React, { useRef, useState, useEffect, useCallback, RefObject } from 'react'
 import { useParams } from 'react-router-dom'
 import { getNotionArticleRecordMaps } from '@/api'
 import { NotionRenderer, Equation, Collection, CollectionRow } from 'react-notion-x'
@@ -90,6 +90,7 @@ export default function ArticleContent() {
       })
     }, [navoToArticleWithSingleId, changeSelectedArticle])
   )
+
   return <div className={styles.contentContainer}>
     <Skeleton className={
       combineClassNames(
@@ -138,15 +139,18 @@ export default function ArticleContent() {
             }}
           />
           {/* 评论组件 */}
-          <h4>评论</h4>
+          <h3>评论</h3>
           <iframe
             src={`https://blog-comment-mocha.vercel.app/?articleId=${params.articleId}`}
             style={{
               width: '100%',
-              border: '0px'
+              minHeight: '600px',
+              maxHeight: '800px',
+              border: '0px',
+              scrollbarWidth: 'none'
             }}
             frameBorder='0'
-            scrolling='no'
+            // scrolling='no'
           />
         </div>
         )
