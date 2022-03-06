@@ -152,7 +152,7 @@ export default function ArticleContent() {
               paddingBottom: '30px'
             }}
             frameBorder='0'
-            scrolling='no'
+            // scrolling='no'
           />
         </div>
         )
