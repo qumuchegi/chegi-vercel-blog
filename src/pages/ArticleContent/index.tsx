@@ -13,6 +13,8 @@ import Skeleton from '@/Components/Skeleton';
 import { ArticleInfo } from '@/store/type';
 import { useLazyImgLoading, useRewriteAnchors } from '@/hooks'
 import { useNaviToArticleContentWithSingleId } from '@/routes/category/article';
+//@ts-ignore
+import BlogCommentFrame from 'blog_comment_frame'
 
 export default function ArticleContent() {
   const params: { articleId: string } = useParams()
@@ -54,21 +56,11 @@ export default function ArticleContent() {
       behavior: 'smooth'
     })
   }, [params])
-  // useLazyImgLoading({
-  //   //@ts-ignore
-  //   container: document.getElementById('article-content')
-  // })
+
   const navoToArticleWithSingleId = useNaviToArticleContentWithSingleId()
   useRewriteAnchors(
     'article-content',
     {
-      // href: (value) => {
-      //   const outSiteLink = /^http/.test(value)
-      //   if (outSiteLink) {
-      //     return value
-      //   }
-      //   return 'https://chegi.notion.site' + value
-      // },
       onclick: (_, anchor) => {
         const outSiteLink = /^http/.test(anchor.getAttribute('href') ?? '')
         if (outSiteLink) {
@@ -140,19 +132,10 @@ export default function ArticleContent() {
           />
           {/* 评论组件 */}
           <h3 style={{marginLeft: '20px'}}>评论</h3>
-          <iframe
-            src={`https://blog-comment-mocha.vercel.app/?articleId=${params.articleId}`}
-            id='comment-iframe'
-            style={{
-              width: '100%',
-              minHeight: '600px',
-              maxHeight: '800px',
-              border: '0px',
-              scrollbarWidth: 'none',
-              paddingBottom: '30px'
-            }}
-            frameBorder='0'
-            // scrolling='no'
+          <BlogCommentFrame
+            commentDeployUrlHost={'http://localhost:3000'}
+            pageId={params.articleId}
+            height='800'
           />
         </div>
         )

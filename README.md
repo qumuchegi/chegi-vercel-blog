@@ -55,4 +55,4 @@ To create a production build, use yarn build.
 
 ## deploy
 
-just execute `vercel --prod`, then can be visit the ths site onlne.
+just execute `vercel --prod`, then can be visit the this site onlne.
