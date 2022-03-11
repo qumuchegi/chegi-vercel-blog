@@ -5,9 +5,8 @@ import { getNotionArticleRecordMaps } from '@/api'
 import { NotionRenderer, Equation, Collection, CollectionRow } from 'react-notion-x'
 import Code from '@/Components/Code'
 import 'react-notion-x/src/styles.css'
-import styles from './styles.module.less'
-import './rewriteNotionXStyle.less'
-import Loading from '@/Components/Loading';
+import styles from '@/Components/NotionContentRenderer/styles.module.less'
+import '@/Components/NotionContentRenderer/rewriteNotionXStyle.less'
 import { combineClassNames } from '@/utils/style';
 import Skeleton from '@/Components/Skeleton';
 import { ArticleInfo } from '@/store/type';
@@ -133,9 +132,8 @@ export default function ArticleContent() {
           {/* 评论组件 */}
           <h3 style={{marginLeft: '20px'}}>评论</h3>
           <BlogCommentFrame
-            commentDeployUrlHost={'https://blog-comment-mocha.vercel.app'}
+            commentDeployUrlHost={'https://blog-comment-mocha.vercel.app'} // 'http://localhost:3000'
             pageId={params.articleId}
-            height='800'
           />
         </div>
         )

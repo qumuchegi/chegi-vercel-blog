@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import { Tabs } from './type'
+import NotionContentRenderer from '@/Components/NotionContentRenderer'
 
 interface IProps {
   projectTitle: string,
@@ -11,13 +12,13 @@ export default function ProjectDetails(props: IProps) {
   const [selectTab, setSelectTab] = useState<{
     tabId: string,
     tabTitle: string,
-    tabContent: string
+    detailsNotionId: string
   }>()
   const onSelectTab = useCallback((
-    tabId: string, tabTitle: string, content: string
+    tabId: string, tabTitle: string, detailsNotionId: string
   ) => {
     setSelectTab({
-      tabId, tabTitle, tabContent: content
+      tabId, tabTitle, detailsNotionId: detailsNotionId
     })
   }, [])
   return <div>
@@ -27,11 +28,10 @@ export default function ProjectDetails(props: IProps) {
       <TabsTree tabs={props.sideBarTabs} onClickTab={onSelectTab}/>
       <div>
         <h4>{selectTab?.tabTitle}</h4>
-        <p>
-          {
-            
-          }
-        </p>
+        {
+          selectTab
+          && <NotionContentRenderer notionId={selectTab.detailsNotionId}/>
+        }
       </div>
     </div>
   </div>
@@ -42,17 +42,17 @@ function TabsTree({
   onClickTab
 }: {
   tabs: Tabs,
-  onClickTab: (tabId: string, tabTitle: string, content: string) => void
+  onClickTab: (tabId: string, tabTitle: string, detailsNotionId: string) => void
 }) {
-  const _onClickTab = useCallback((tabId, tabTitle, content) => {
-    onClickTab(tabId, tabTitle, content)
+  const _onClickTab = useCallback((tabId, tabTitle, detailsNotionId) => {
+    onClickTab(tabId, tabTitle, detailsNotionId)
   }, [])
   return <div>
     {
       tabs.map(({
         title,
         tabId,
-        detailsMarkdownString,
+        detailsNotionId,
         children = []
       }) => {
         if (children?.length > 0) {
@@ -63,7 +63,7 @@ function TabsTree({
             </div>
           </details>
         } else {
-          return <div onClick={() => _onClickTab(tabId, title, detailsMarkdownString)}>{title}</div>
+          return <div onClick={() => _onClickTab(tabId, title, detailsNotionId)}>{title}</div>
         }
       })
     }

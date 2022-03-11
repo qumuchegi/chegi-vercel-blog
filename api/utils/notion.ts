@@ -8,7 +8,7 @@ const notionAPI = new NotionClinet({
   auth: notionAuthToken
 })
 const notionAPI2 = new NotionAPI()
-export function parsePageId(rawPageId) {
+export function parsePageId(rawPageId: any) {
   if (/[^-]{8}-[^-]{4}-[^-]{4}-[^-]{4}-[^-]{12}/.test(rawPageId)) {
     return rawPageId
   }
@@ -20,7 +20,7 @@ export function parsePageId(rawPageId) {
     rawPageId.slice(20, 32)
   ].join('-')
 }
-export async function getSingleArticleInfo(articleId) {
+export async function getSingleArticleInfo(articleId: any) {
   const res = await notionAPI.pages.retrieve({
     page_id: articleId
   })
@@ -29,7 +29,7 @@ export async function getSingleArticleInfo(articleId) {
     k: res
   })
 }
-export async function getContentOfArticleForRender(articleId) {
+export async function getContentOfArticleForRender(articleId: any) {
   const res = await notionAPI2.getPage(
     articleId.replace(/-/g, '')
   )
@@ -48,13 +48,14 @@ function _formatCMSData(cmsData: unknown): {
   }
 } {
   let result = {}
-  Object.values(cmsData).forEach(({
+  Object.values(cmsData)
+  .forEach(({
     id,
     url,
     created_time,
     last_edited_time,
     properties
-  }) => {
+  } ) => {
     const {
       tab,
       pageTitle,
