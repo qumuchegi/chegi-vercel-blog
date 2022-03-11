@@ -134,6 +134,7 @@ export default function ArticleContent() {
           <BlogCommentFrame
             commentDeployUrlHost={'https://blog-comment-mocha.vercel.app'} // https://blog-comment-mocha.vercel.app
             pageId={params.articleId}
+            githubAuthClientId={'a3038c6aecde7bd31b6e'}
           />
         </div>
         )
