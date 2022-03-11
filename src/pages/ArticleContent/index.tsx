@@ -132,7 +132,7 @@ export default function ArticleContent() {
           {/* 评论组件 */}
           <h3 style={{marginLeft: '20px'}}>评论</h3>
           <BlogCommentFrame
-            commentDeployUrlHost={'https://blog-comment-mocha.vercel.app'} // 'http://localhost:3000'
+            commentDeployUrlHost={'https://blog-comment-mocha.vercel.app'} // https://blog-comment-mocha.vercel.app
             pageId={params.articleId}
           />
         </div>
