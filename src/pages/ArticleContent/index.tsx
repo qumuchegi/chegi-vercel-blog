@@ -130,12 +130,14 @@ export default function ArticleContent() {
             }}
           />
           {/* 评论组件 */}
-          <h3 style={{marginLeft: '20px'}}>评论</h3>
-          <BlogCommentFrame
-            commentDeployUrlHost={'https://blog-comment-mocha.vercel.app'} // https://blog-comment-mocha.vercel.app
-            pageId={params.articleId}
-            githubAuthClientId={'a3038c6aecde7bd31b6e'}
-          />
+          <div className={styles.comment}>
+            <h3 style={{marginLeft: '20px'}}>评论</h3>
+            <BlogCommentFrame
+              commentDeployUrlHost={'https://blog-comment-mocha.vercel.app'} // https://blog-comment-mocha.vercel.app
+              pageId={params.articleId}
+              githubAuthClientId={'a3038c6aecde7bd31b6e'}
+            />
+          </div>
         </div>
         )
     }

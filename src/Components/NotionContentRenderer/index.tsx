@@ -72,7 +72,7 @@ export default function NotionContentRenderer({
         <div id='article-content'>
           <NotionRenderer
             recordMap={articleBlocks}
-            fullPage={false}
+            // fullPage={false}
             darkMode={false}
             showTableOfContents
             disableHeader

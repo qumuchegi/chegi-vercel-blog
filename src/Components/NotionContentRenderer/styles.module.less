@@ -2,23 +2,26 @@
 
 .contentContainer {
   padding: 20px 0;
+  flex: 1;
   // @media screen and (min-width: 768px) {
   //   width: calc(100vw - 20rem + 20px - 80px);
   //   margin-left: 30px;
   // }
   .content {
-    padding: 5px;
-    margin: 0;
-    // font-family: "Kalam_Regular", @default-font-family;
+    // // font-family: "Kalam_Regular", @default-font-family;
+    // line-height: 1.8rem;
     line-height: 1.8rem;
-
     @media screen and (max-width: 768px) {
-      width: calc(100vw - 10px);
+      padding-left: 10px;
+      padding-right: 10px;
+      width: calc(100vw - 20px);
       word-break: break-all;
       overflow: auto;
+      margin: auto;
     }
     @media screen and (min-width: 768px) {
-      width: calc(100vw - 20rem + 20px - 80px) / 1.5;
+      padding-left: calc(100vw - 50vw - 20vw) / 2;
+      padding-right: calc(100vw - 50vw - 20vw) / 2;
     }
   }
   .loading {
@@ -36,7 +39,7 @@
       width: calc(100vw);
     }
     @media screen and (min-width: 768px) {
-      width: 700px;
+      width: 50vw;
     }
     margin-left: auto;
     margin-right: auto;
@@ -65,4 +68,14 @@
   @media screen and (min-width: 768px) {
     width: calc(100vw - 20rem + 20px - 80px) / 1.5;
   }
+}
+.comment {
+  @media screen and (max-width: 768px) {
+    
+  }
+  @media screen and (min-width: 768px) {
+    width: 50vw;
+    margin: auto;
+  }
+
 }
