@@ -2988,10 +2988,10 @@ bindings@^1.5.0:
   dependencies:
     file-uri-to-path "1.0.0"
 
-blog_comment_frame@^1.0.15:
-  version "1.1.0"
-  resolved "https://r.cnpmjs.org/blog_comment_frame/-/blog_comment_frame-1.1.0.tgz#c148f7568af3e9889dcb82387ec75f575efc7a91"
-  integrity sha512-DMjnlurFyPYewTwokj+leUiPReWVVktSKDbkXZCXbq1H6BzAFU8r318QCgjKHQ+szzkVuZVDWeF3lslHi+Bs+g==
+blog_comment_frame@^1.1.7:
+  version "1.1.7"
+  resolved "https://r.cnpmjs.org/blog_comment_frame/-/blog_comment_frame-1.1.7.tgz#0a8e310d9c99ae9755859cabefd3f670ea4b5150"
+  integrity sha512-8eBiVrj5uDcTmsu/F4YmLSlLxKZy2vy5GE6r7RcNj4+jojH3EOv2fDu46/aAicFEkrr2XDoZxhAmGiOxVZsPmg==
   dependencies:
     react "^16.8.6"
     react-dom "^16.8.6"
