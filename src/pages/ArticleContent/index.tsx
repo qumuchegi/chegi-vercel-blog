@@ -57,13 +57,14 @@ export default function ArticleContent() {
     })
   }, [params])
 
-  // useEffect(() => {
-  //   BlogCommentShell({
-  //     containerId: 'blog-comment-parent-container',
-  //     commentDeployHost: 'http://localhost:3000',
-  //     pageId: params.articleId,
-  //   })
-  // }, [])
+  useEffect(() => {
+    BlogCommentShell({
+      containerId: 'blog-comment-parent-container',
+      commentDeployHost: 'https://blog-comment-mocha.vercel.app',
+      pageId: params.articleId,
+      auth: ['github', 'anonymous']
+    })
+  }, [params.articleId])
 
   const navoToArticleWithSingleId = useNaviToArticleContentWithSingleId()
   useRewriteAnchors(
@@ -141,12 +142,12 @@ export default function ArticleContent() {
           {/* 评论组件 */}
           <div className={styles.comment}>
             <h3 style={{marginLeft: '20px'}}>评论</h3>
-            {/* <div id='blog-comment-parent-container'/> */}
-            <BlogCommentFrame
+            <div id='blog-comment-parent-container'/>
+            {/* <BlogCommentFrame
               commentDeployHost={'https://blog-comment-mocha.vercel.app'} // https://blog-comment-mocha.vercel.app
               pageId={params.articleId}
               auth={['github', 'anonymous']}
-            />
+            /> */}
           </div>
         </div>
         )

@@ -169,6 +169,7 @@ export const BlogCommentShell = ({
     IframeCommunication.listenIframe(
       PARENT_GITHUB_AUTH_MSG_START,
       (evt, data) => {
+        console.log('发起 GitHub 登录', data);
         const url = `https://github.com/login/oauth/authorize?client_id=${githubAuthClientId}`
           + (
             `&redirect_uri=${`${commentDeployHost}/api/githubLoginCallback?redirect_url=` + encodeURIComponent(window.location.href)}`
@@ -287,20 +288,11 @@ export const BlogCommentShell = ({
     });
     if (!container) return
     container && container.appendChild(iframe)
-    observer.disconnect()
-  })
-
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true
-  })
-
-  window.onload = () => {
 
     IframeCommunication.init(
       (evt, data) => {
         onIframeLoaded()
-        console.log({evt, data});
+        // console.log({evt, data});
         bindGithubAuthRedirectListener(data.githubAuthClientId)
       }
     )
@@ -311,6 +303,13 @@ export const BlogCommentShell = ({
         document.getElementById(IFRAME_ID).style.height = Number(data.height) + 50 + 'px'
       }
     )
-  }
+    observer.disconnect()
+  })
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  })
+
 }
 
