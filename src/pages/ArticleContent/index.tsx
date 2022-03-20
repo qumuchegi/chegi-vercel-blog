@@ -13,7 +13,8 @@ import { ArticleInfo } from '@/store/type';
 import { useLazyImgLoading, useRewriteAnchors } from '@/hooks'
 import { useNaviToArticleContentWithSingleId } from '@/routes/category/article';
 //@ts-ignore
-import BlogCommentFrame from 'blog_comment_frame'
+import BlogCommentFrame, { BlogCommentShell } from 'blog_comment_frame'
+//import BlogCommentFrame, { BlogCommentShell } from '@/utils/BlogCommentFrame'
 
 export default function ArticleContent() {
   const params: { articleId: string } = useParams()
@@ -55,6 +56,14 @@ export default function ArticleContent() {
       behavior: 'smooth'
     })
   }, [params])
+
+  // useEffect(() => {
+  //   BlogCommentShell({
+  //     containerId: 'blog-comment-parent-container',
+  //     commentDeployHost: 'http://localhost:3000',
+  //     pageId: params.articleId,
+  //   })
+  // }, [])
 
   const navoToArticleWithSingleId = useNaviToArticleContentWithSingleId()
   useRewriteAnchors(
@@ -132,10 +141,11 @@ export default function ArticleContent() {
           {/* 评论组件 */}
           <div className={styles.comment}>
             <h3 style={{marginLeft: '20px'}}>评论</h3>
+            {/* <div id='blog-comment-parent-container'/> */}
             <BlogCommentFrame
-              commentDeployUrlHost={'https://blog-comment-mocha.vercel.app'} // https://blog-comment-mocha.vercel.app
+              commentDeployHost={'https://blog-comment-mocha.vercel.app'} // https://blog-comment-mocha.vercel.app
               pageId={params.articleId}
-              githubAuthClientId={'a3038c6aecde7bd31b6e'}
+              auth={['github', 'anonymous']}
             />
           </div>
         </div>
