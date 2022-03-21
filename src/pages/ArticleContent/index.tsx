@@ -76,6 +76,15 @@ export default function ArticleContent() {
         } else {
           return 'return false'
         }
+      },
+      href: (url, anchor) => {
+        if (
+          anchor.getAttribute('class') === 'notion-hash-link'
+          && url?.[0] === '#'
+        ) {
+          return window.location.href + url
+        }
+        return url
       }
     },
     isLoading,

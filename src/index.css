@@ -18,15 +18,15 @@ code {
 
 ::selection {
   color: #fff !important;
-  background: rgb(235, 29, 91) !important;
+  background: rgb(63, 188, 219) !important;
 }
 ::-moz-selection {
   color: #fff !important;
-  background: rgb(235, 29, 91) !important;
+  background: rgb(63, 188, 219) !important;
 }
 ::-webkit-selection {
   color: #fff !important;
-  background: rgb(235, 29, 91) !important;
+  background: rgb(63, 188, 219) !important;
 }
 @font-face {
   font-family: 'Oooh Baby';

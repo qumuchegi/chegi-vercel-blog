@@ -39,12 +39,16 @@ function RoutesContent() {
     window.location.pathname = '/'
   }, [])
   return <div>
-    <div className={headerStyles.header}>
-      <div className={headerStyles.title} onClick={toHome}>Chegi's space</div>
+    <div className={headerStyles.container}>
+      <div className={headerStyles.header}>
+        <div className={headerStyles.title} onClick={toHome}>Chegi's space</div>
+      </div>
+      <div className={headerStyles.links}>
+        <a href='https://github.com/qumuchegi' target='_blank' title="qumuchegi github">
+          <img src="https://img.shields.io/github/stars/qumuchegi?style=social" alt='Github'/>
+        </a>
+      </div>
     </div>
-    {/* <div className={headerStyles.hideAvatar}>
-        hahaah 
-    </div> */}
     {content}
   </div>
 }

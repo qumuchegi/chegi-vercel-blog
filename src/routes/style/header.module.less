@@ -1,35 +1,41 @@
 @import "../../style/font.less";
 
-.header  {
-  z-index: 10;
+.container {
   display: flex;
-  margin: 0;
-  // @media screen and (max-width: 768px) {
-  //   width: 100vw;
-  // }
-  // @media screen and (min-width: 768px) {
-  //   width: calc(100vw  - 60px);
-  // }
   justify-content: space-between;
-  .title {
-    font-family: "Bradley Hand", cursive, @default-font-family;
-    @media screen and (max-width: 768px) {
-      font-size: 2rem;
+  align-items: center;
+  padding: 0 20px;
+  position: relative;
+  .header  {
+    // z-index: 10;
+    display: flex;
+    margin: 0;
+    // @media screen and (max-width: 768px) {
+    //   width: 100vw;
+    // }
+    // @media screen and (min-width: 768px) {
+    //   width: calc(100vw  - 60px);
+    // }
+    justify-content: space-between;
+    .title {
+      font-family: "Bradley Hand", cursive, @default-font-family;
+      @media screen and (max-width: 768px) {
+        font-size: 2rem;
+      }
+      @media screen and (min-width: 768px) {
+        font-size: 4rem;
+        height: 5rem;
+      }
+      &:hover {
+        cursor: pointer;
+      }
     }
-    @media screen and (min-width: 768px) {
-      font-size: 4rem;
-      height: 5rem;
-    }
-    &:hover {
-      cursor: pointer;
-    }
+    padding: 10px 20px;
   }
-  padding: 10px 20px;
-}
-.hideAvatar {
-  position: sticky;
-  top: 0px;
-  z-index: 11;
-  margin-top: 5rem;
-  background-color: antiquewhite;
+  
+  .links {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
 }
