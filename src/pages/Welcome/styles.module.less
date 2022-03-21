@@ -4,6 +4,9 @@
   @media screen and (max-width: 768px) {
     width: 100vw;
     .hello{
+      position: sticky;
+      z-index: -1;
+      top: 10%;
       font-size: 2rem;
       line-height: 5rem;
       padding: 10px;
@@ -15,6 +18,9 @@
     margin: 100px auto;
     width: 750px;
     .hello{
+      position: sticky;
+      top: 35%;
+      z-index: -1;
       font-size: 3rem;
       font-family:'Oooh Baby', @default-font-family;
       color: rgb(63, 188, 219);
@@ -24,6 +30,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 2;
+    position: relative;
+    margin-bottom: 100px;
+    &::before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      filter: blur(100px);
+      box-shadow: inset 0 0 0 3000px rgba(255,255,255,0.3);
+    }
     .item{
       display: flex;
       justify-content: center;
@@ -47,10 +66,15 @@
         transition: opacity 1s;
       }
       .prj-desc{
-        opacity: 0;
         color: #fff;
         padding: 10px;
         transition: opacity 1s;
+        @media screen and (min-width: 768px) {
+          opacity: 0;
+        }
+        @media screen and (max-width: 768px) {
+          opacity: 1;
+        }
       }
 
     }

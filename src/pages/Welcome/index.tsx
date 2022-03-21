@@ -10,7 +10,7 @@ const PRJ = [
     avatar: 'https://blog-comment-doc-site.vercel.app/img/logo.png',
     desc: '一个开箱即用的评论组件',
     url: 'https://blog-comment-doc-site.vercel.app/',
-    githubFork: 'https://img.shields.io/github/forks/qumuchegi/auth-demo?style=social'
+    githubFork: 'https://img.shields.io/github/forks/qumuchegi/blog-comment?style=social'
   }
 ]
 

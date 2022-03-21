@@ -6,15 +6,14 @@
   display: flex;
   color: rgb(88 199 250 / 0%);
   position: relative;
-  box-shadow: -2px -2px 9px rgb(23, 50, 77);
   cursor: pointer;
   transform: translate(0, 0);
   transition: transform .3s;
   &:hover {
     transform: translate(5px, 5px);
-    box-shadow: -5px -5px 10px rgb(23, 50, 77);
     transition: transform .5s;
   }
+  --rotate: 132deg;
   @property --rotate {
     syntax: "<angle>";
     initial-value: 132deg;
