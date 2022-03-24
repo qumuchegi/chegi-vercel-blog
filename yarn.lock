@@ -2988,9 +2988,9 @@ bindings@^1.5.0:
   dependencies:
     file-uri-to-path "1.0.0"
 
-blog_comment_frame@^1.2.6:
+blog_comment_frame@^1.2.7:
   version "1.2.7"
-  resolved "https://r.cnpmjs.org/blog_comment_frame/-/blog_comment_frame-1.2.7.tgz#d9b0808bb07885ab938798f0841155ffdd315e9e"
+  resolved "https://registry.yarnpkg.com/blog_comment_frame/-/blog_comment_frame-1.2.7.tgz#d9b0808bb07885ab938798f0841155ffdd315e9e"
   integrity sha512-YlvGMligx0oPK0h2RsNRhgUAa6A6ltksHyv2Sc0ncX06yRdMAYWDbpMjqhd/C1oReC8RYWWcgmJ/DAmoM8BQKg==
   dependencies:
     react "^16.8.6"
