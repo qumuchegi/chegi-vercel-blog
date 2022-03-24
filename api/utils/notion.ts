@@ -42,12 +42,12 @@ export async function getAllTabArticleList() {
   // console.log(JSON.stringify(res))
   return _formatCMSData( res.results )
 }
-function _formatCMSData(cmsData: unknown): {
+function _formatCMSData(cmsData: Record<string, any>): {
   [tab: string]: {
     articles: ArticleInfo[]
   }
 } {
-  let result = {}
+  let result: Record<string, any> = {}
   Object.values(cmsData)
   .forEach(({
     id,
