@@ -3,7 +3,7 @@ import Http from './base'
 
 export async function getNotionCMSBlogs(): Promise<{
   tabBlogs: {
-    [tab: string]: (ArticleInfo[] | {[collectionName: string]: ArticleInfo[]})
+    [tab: string]: (ArticleInfo | {collection: string; articles: ArticleInfo[]}) []
   }
 } | null> {
   try {

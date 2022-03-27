@@ -64,15 +64,13 @@ function _formatCMSData(cmsData: Record<string, any>): {
       collection,
       CustomCreate
     } = properties
-    console.log({
-      properties
-    })
+
     const tabName = tab.select?.name
     if (!tabName || progress?.select?.name === 'doing') {
       return
     }
     const articleTitle = pageTitle.title?.[0]?.plain_text
-    const collectionName = collection?.select?.name ?? ''
+    const collectionName = collection?.select?.name || ''
     const newItem = {
       articleUrl: url,
       articleId: id,
@@ -80,24 +78,31 @@ function _formatCMSData(cmsData: Record<string, any>): {
       lastEditedTime: last_edited_time,
       title: articleTitle,
       tag,
-      CustomCreate: CustomCreate.formula.string,
+      //CustomCreate: CustomCreate.formula.string,
       collection: collectionName
     }
+    if (!result[tabName]) {
+      result[tabName] = []
+    }
     if (collectionName) {
-      if (!result[tabName]) {
-        result[tabName] = {}
+      const existCollectionIdx = result[tabName].findIndex(item => item.collection === collectionName)
+      if (existCollectionIdx === -1) {
+        result[tabName].push({
+          collection: collectionName,
+          articles: [
+            newItem
+          ]
+        })
+      } else {
+        result[tabName][existCollectionIdx] = {
+          collection: collectionName,
+          articles: [
+            ...result[tabName][existCollectionIdx].articles,
+            newItem
+          ]
+        }
       }
-      if (!result[tabName][collectionName]) {
-        result[tabName][collectionName] = []
-      }
-      result[tabName][collectionName] = [
-        ...(result[tabName][collectionName] || []),
-        newItem
-      ]
     } else {
-      if (!result[tabName]) {
-        result[tabName] = []
-      }
       result[tabName] = [
         ...(result[tabName] || []),
         newItem

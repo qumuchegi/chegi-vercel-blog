@@ -23,21 +23,24 @@ function RoutesContent() {
         // 过滤掉无效的文章
         const filtered: any  = {}
         Object.entries(res?.tabBlogs ?? {}).forEach(([tabName, articlesOrCollection]) => {
-          if (Array.isArray(articlesOrCollection)) {
-            // articles
-            filtered[tabName] = articlesOrCollection.filter(item  => item.title)
-          } else {
-            // collection
-            const [collectionName, articles] = Object.entries(articlesOrCollection)
-            filtered[tabName] = [
-              ...filtered[tabName],
-              {
-                $type: 'collection',
-                collection: collectionName,
-                articles
-              }
-            ]
-          }
+          filtered[tabName] = articlesOrCollection
+          // .map(item => {
+          //   if (!item.collection) {
+          //     return item
+          //   } else {
+          //     console.log({
+          //       articlesOrCollection
+          //     });
+          //     // collection
+          //     // @ts-ignore
+          //     const {collection, articles } = articlesOrCollection
+          //     return {
+          //       type: 'collection',
+          //       collection,
+          //       articles
+          //     }
+          //   }
+          // })
         })
         recordTabBlogs(filtered)
       } catch (err) {

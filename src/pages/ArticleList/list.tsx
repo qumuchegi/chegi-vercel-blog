@@ -50,8 +50,10 @@ export default function ArticlList(
     >
       <div className={styles.title}>{article.title}</div>
     </div>
-  }, [])
-
+  }, [selectedArticleId])
+  // console.log({
+  //   articles
+  // });
   return <div style={{padding: '10px'}} className={styles.container}>
     { articles
       ?.map((
@@ -59,24 +61,22 @@ export default function ArticlList(
             ArticleInfo
             | (
               {
-                $type: 'collection',
+                type: 'collection',
                 collection: string,
                 articles: ArticleInfo[]
               }
             )
       ) => {
         //@ts-ignore
-        if (article.$type === 'collection') {
+        if (article.collection) {
           return <details>
             <summary>{article.collection}</summary>
-            <p>
-              {
-                // @ts-ignore
-                article.articles.map(item => {
-                  return generateArtcileMenuItem(item)
-                })
-              }
-            </p>
+            {
+              // @ts-ignore
+              article.articles.map(item => {
+                return generateArtcileMenuItem(item)
+              })
+            }
           </details>
         }
         // @ts-ignore
