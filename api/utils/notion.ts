@@ -60,24 +60,49 @@ function _formatCMSData(cmsData: Record<string, any>): {
       tab,
       pageTitle,
       tag,
-      progress
+      progress,
+      collection,
+      CustomCreate
     } = properties
+    console.log({
+      properties
+    })
     const tabName = tab.select?.name
     if (!tabName || progress?.select?.name === 'doing') {
       return
     }
     const articleTitle = pageTitle.title?.[0]?.plain_text
-    result[tabName] = [
-      ...(result[tabName] || []),
-      {
-        articleUrl: url,
-        articleId: id,
-        createdTime: created_time,
-        lastEditedTime: last_edited_time,
-        title: articleTitle,
-        tag
+    const collectionName = collection?.select?.name ?? ''
+    const newItem = {
+      articleUrl: url,
+      articleId: id,
+      createdTime: created_time,
+      lastEditedTime: last_edited_time,
+      title: articleTitle,
+      tag,
+      CustomCreate: CustomCreate.formula.string,
+      collection: collectionName
+    }
+    if (collectionName) {
+      if (!result[tabName]) {
+        result[tabName] = {}
       }
-    ]
+      if (!result[tabName][collectionName]) {
+        result[tabName][collectionName] = []
+      }
+      result[tabName][collectionName] = [
+        ...(result[tabName][collectionName] || []),
+        newItem
+      ]
+    } else {
+      if (!result[tabName]) {
+        result[tabName] = []
+      }
+      result[tabName] = [
+        ...(result[tabName] || []),
+        newItem
+      ]
+    }
   })
   return result
 }

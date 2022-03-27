@@ -11,6 +11,8 @@ export type ArticleInfo = {
     }[]
   },
   content?: string
+  CustomCreate: string
+  collection: string
 }
 
 export type TabArticles = {

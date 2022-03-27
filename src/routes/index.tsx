@@ -22,8 +22,22 @@ function RoutesContent() {
         const res = await getNotionCMSBlogs()
         // 过滤掉无效的文章
         const filtered: any  = {}
-        Object.entries(res?.tabBlogs ?? {}).forEach(([tabName, articles]) => {
-          filtered[tabName] = articles.filter(item  => item.title)
+        Object.entries(res?.tabBlogs ?? {}).forEach(([tabName, articlesOrCollection]) => {
+          if (Array.isArray(articlesOrCollection)) {
+            // articles
+            filtered[tabName] = articlesOrCollection.filter(item  => item.title)
+          } else {
+            // collection
+            const [collectionName, articles] = Object.entries(articlesOrCollection)
+            filtered[tabName] = [
+              ...filtered[tabName],
+              {
+                $type: 'collection',
+                collection: collectionName,
+                articles
+              }
+            ]
+          }
         })
         recordTabBlogs(filtered)
       } catch (err) {

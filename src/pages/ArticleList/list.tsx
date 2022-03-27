@@ -35,35 +35,52 @@ export default function ArticlList(
     [selectedTab, toArticleDetail, closeBottomSheet]
   )
 
-  return <div style={{padding: '10px'}}>
+  const generateArtcileMenuItem = useCallback((article: ArticleInfo) => {
+    return <div
+      key={article.articleId}
+      className={
+        combineClassNames(
+          styles.listItem,
+          selectedArticleId === article.articleId ? styles.listItemSelected : '',
+        )
+      }
+      onClick={() => {
+        onSelectArticle(article.articleId)
+      }}
+    >
+      <div className={styles.title}>{article.title}</div>
+    </div>
+  }, [])
+
+  return <div style={{padding: '10px'}} className={styles.container}>
     { articles
-      ?.map((article: ArticleInfo) => {
-        return <div
-          key={article.articleId}
-          className={
-            combineClassNames(
-              styles.listItem,
-              selectedArticleId === article.articleId ? styles.listItemSelected : '',
+      ?.map((
+          article:
+            ArticleInfo
+            | (
+              {
+                $type: 'collection',
+                collection: string,
+                articles: ArticleInfo[]
+              }
             )
-          }
-          onClick={() => {
-            onSelectArticle(article.articleId)
-          }}
-        >
-          <div className={styles.title}>{article.title}</div>
-          {/* <div className={styles.tagContainer}>
-            {
-              article.tag?.multi_select?.map(({
-                id,
-                name,
-              }) => {
-                return <div key={id} className={styles.tagItem}>
-                  {name}
-                </div>
-              })
-            }
-          </div> */}
-        </div>
+      ) => {
+        //@ts-ignore
+        if (article.$type === 'collection') {
+          return <details>
+            <summary>{article.collection}</summary>
+            <p>
+              {
+                // @ts-ignore
+                article.articles.map(item => {
+                  return generateArtcileMenuItem(item)
+                })
+              }
+            </p>
+          </details>
+        }
+        // @ts-ignore
+        return generateArtcileMenuItem(article)
       })
     }
   </div>
