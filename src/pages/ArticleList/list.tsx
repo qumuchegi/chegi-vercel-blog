@@ -50,7 +50,7 @@ export default function ArticlList(
     >
       <div className={styles.title}>{article.title}</div>
     </div>
-  }, [selectedArticleId])
+  }, [selectedArticleId, onSelectArticle])
   // console.log({
   //   articles
   // });
