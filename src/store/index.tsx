@@ -91,11 +91,20 @@ const ConnectStore = ({ children }: { children: React.ReactChild }) => {
     )
       //@ts-ignore
       .reduce((flatTabArticles, tabArticles) => {
+        //@ts-ignore
+        const articles = Object.values(tabArticles).map(i => {
+          //@ts-ignore
+          if (i.collection) {
+            //@ts-ignore
+            return i.articles
+          } else {
+            return i
+          }
+        })
         return [
           //@ts-ignore
           ...flatTabArticles,
-          //@ts-ignore
-          ...Object.values(tabArticles)
+          ...articles.flat()
         ]
       }, [])
     //@ts-ignore
