@@ -1,8 +1,8 @@
-import React from "react"
+import React from "react";
 
 export type RouteItem = {
-  title: string
-  path: string
-  exact?: boolean
-  component?: JSX.Element
-}
+  title: string;
+  path: string;
+  exact?: boolean;
+  component?: JSX.Element;
+};

@@ -1,29 +1,29 @@
-.outerContainer{
+.outerContainer {
   position: absolute;
   z-index: 1;
   // top: 0;
   // left: 0;
   // right: 0;
-  &.open{
+  &.open {
     top: 0;
     left: 0;
     right: 0;
     transform: scaleY(100%);
-    transition: top .5s ease-in-out, transform .5s ease-in-out;
+    transition: top 0.5s ease-in-out, transform 0.5s ease-in-out;
   }
-  &.close{
+  &.close {
     top: 100vh;
     transform: scaleY(0);
     left: 0;
     right: 0;
     bottom: 0;
-    transition: top .5s ease-in-out, transform .5s ease-in-out;
+    transition: top 0.5s ease-in-out, transform 0.5s ease-in-out;
   }
-  .container{
+  .container {
     height: 100vh;
     width: 100vw;
     position: relative;
-    .background{
+    .background {
       height: 100vh;
       width: 100vw;
       top: 0;
@@ -32,17 +32,17 @@
       bottom: 0;
       position: absolute;
       z-index: 100;
-      background-color: rgb(0,0,0);
-      &.openBg{
+      background-color: rgb(0, 0, 0);
+      &.openBg {
         opacity: 0;
-        transition: opacity .5s;
+        transition: opacity 0.5s;
       }
-      &.closeBg{
+      &.closeBg {
         opacity: 0.2;
-        transition: opacity .5s;
+        transition: opacity 0.5s;
       }
     }
-    .bottomSheet{
+    .bottomSheet {
       // background-color: #fff;
       position: absolute;
       z-index: 101;
@@ -52,7 +52,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      .header{
+      .header {
         width: 100vw;
         height: 50px;
         // background-color: rgba(0,0,0,.2);
@@ -66,7 +66,7 @@
           border-radius: 5px;
         }
       }
-      .content{
+      .content {
         background-color: #fff;
         height: calc(60vh - 50px - 20px);
         overflow-y: scroll;

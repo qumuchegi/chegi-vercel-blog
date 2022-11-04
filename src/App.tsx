@@ -1,8 +1,10 @@
-import * as React from 'react'
-import RoutesContent from './routes'
+import * as React from "react";
+import RoutesContent from "./routes";
 
 export default function App() {
-  return <div>
-    <RoutesContent/>
-  </div>
+  return (
+    <div>
+      <RoutesContent />
+    </div>
+  );
 }

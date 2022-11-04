@@ -1,1 +1,1 @@
-export * from './noton'
+export * from "./noton";

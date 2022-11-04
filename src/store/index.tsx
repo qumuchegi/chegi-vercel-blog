@@ -1,176 +1,214 @@
 // import BottomSheet, { BottomSheetHandle } from '@/Components/BottomSheet'
-import React, { useReducer, useContext, createContext, useCallback, useMemo, useRef, useState } from 'react'
-import { ArticleInfo, Store, TabArticles } from './type'
-import { BottomSheet, BottomSheetRef as BottomSheetHandle } from 'react-spring-bottom-sheet'
-import 'react-spring-bottom-sheet/dist/style.css'
+import React, {
+  useReducer,
+  useContext,
+  createContext,
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { ArticleInfo, Store, TabArticles } from "./type";
+import {
+  BottomSheet,
+  BottomSheetRef as BottomSheetHandle,
+} from "react-spring-bottom-sheet";
+import "react-spring-bottom-sheet/dist/style.css";
 
 const defaultContextValue: Store = {
   uiState: {
     isNarrowDevice: false,
-    selectedTab: '',
-    selectedArticleId: '',
+    selectedTab: "",
+    selectedArticleId: "",
 
     actions: {
-      changeSelectedTab: (tabName: string) => { },
-      changeSelectedArticle: (articleId: string) => { },
+      changeSelectedTab: (tabName: string) => {},
+      changeSelectedArticle: (articleId: string) => {},
       setBottomSheetChildren: (bottomSheetChild: JSX.Element) => {},
-      closeBottomSheet: () => { }
-    }
+      closeBottomSheet: () => {},
+    },
   },
   articles: {
     tabArticles: {},
     actions: {
       getArticlesByTabName: () => {},
       recordTabBlogs: () => {},
-      getArticleInfo: (id) => null
-    }
-  }
-}
-const storeContext = createContext(defaultContextValue)
+      getArticleInfo: (id) => null,
+    },
+  },
+};
+const storeContext = createContext(defaultContextValue);
 type Action = {
-  type: string,
-  payload: any
-}
+  type: string;
+  payload: any;
+};
 const rootReducer = (state: Store = defaultContextValue, action: Action) => {
   switch (action.type) {
-    case 'recordTabBlogs': return {
-      ...state,
-      articles: {
-        ...state.articles,
-        tabArticles: action.payload.tabArticles
-      }
-    }
-    case 'changeTab': return {
-      ...state,
-      uiState: {
-        ...state.uiState,
-        selectedTab: action.payload.selectedTab
-      }
-    }
-    case 'changeArticle': return {
-      ...state,
-      uiState: {
-        ...state.uiState,
-        selectedArticleId: action.payload.articleId
-      }
-    }
-    default: return state
+    case "recordTabBlogs":
+      return {
+        ...state,
+        articles: {
+          ...state.articles,
+          tabArticles: action.payload.tabArticles,
+        },
+      };
+    case "changeTab":
+      return {
+        ...state,
+        uiState: {
+          ...state.uiState,
+          selectedTab: action.payload.selectedTab,
+        },
+      };
+    case "changeArticle":
+      return {
+        ...state,
+        uiState: {
+          ...state.uiState,
+          selectedArticleId: action.payload.articleId,
+        },
+      };
+    default:
+      return state;
   }
-}
+};
 const ConnectStore = ({ children }: { children: React.ReactChild }) => {
-  const [store, dispatch] = useReducer(rootReducer, defaultContextValue)
-  const [isOpenBottomSheet, setIsOpenBottomSheet] = useState<boolean>(false)
-  const bottomSheetRef = useRef<BottomSheetHandle>()
-  const [bottomSheetHeader, setBottomSheetHeader] = useState<JSX.Element | undefined>()
-  const [bottomSheetChildren, setBottomSheetChildren] = useState<JSX.Element | undefined>()
-  const recordTabBlogs = useCallback(
-    (tabArticles: TabArticles) => {
-      dispatch({
-        type: 'recordTabBlogs',
-        payload: {
-          tabArticles: tabArticles ?? {}
-        }
-      })
-    },
-    []
-  )
+  const [store, dispatch] = useReducer(rootReducer, defaultContextValue);
+  const [isOpenBottomSheet, setIsOpenBottomSheet] = useState<boolean>(false);
+  const bottomSheetRef = useRef<BottomSheetHandle>();
+  const [bottomSheetHeader, setBottomSheetHeader] = useState<
+    JSX.Element | undefined
+  >();
+  const [bottomSheetChildren, setBottomSheetChildren] = useState<
+    JSX.Element | undefined
+  >();
+  const recordTabBlogs = useCallback((tabArticles: TabArticles) => {
+    dispatch({
+      type: "recordTabBlogs",
+      payload: {
+        tabArticles: tabArticles ?? {},
+      },
+    });
+  }, []);
   const getArticlesByTabName = useCallback(
     (tabName: string) => {
-      return store.articles.tabArticles[tabName]
-    }, [store]
-  )
+      return store.articles.tabArticles[tabName];
+    },
+    [store]
+  );
   const changeSelectedTab = useCallback((tabName: string) => {
-    dispatch({ type: 'changeTab', payload: { selectedTab: tabName }})
-  }, [])
+    dispatch({ type: "changeTab", payload: { selectedTab: tabName } });
+  }, []);
   const changeSelectedArticle = useCallback((articleId: string) => {
-    dispatch({ type: 'changeArticle', payload: { articleId }})
-  }, [])
-  const getArticleInfo = useCallback((articleId: string) => {
-    const articles = Object.values(
-        (store?.articles.tabArticles ?? {})
-    )
-      //@ts-ignore
-      .reduce((flatTabArticles, tabArticles) => {
+    dispatch({ type: "changeArticle", payload: { articleId } });
+  }, []);
+  const getArticleInfo = useCallback(
+    (articleId: string) => {
+      const articles = Object.values(store?.articles.tabArticles ?? {})
         //@ts-ignore
-        const articles = Object.values(tabArticles).map(i => {
+        .reduce((flatTabArticles, tabArticles) => {
           //@ts-ignore
-          if (i.collection) {
+          const articles = Object.values(tabArticles).map((i) => {
             //@ts-ignore
-            return i.articles
-          } else {
-            return i
-          }
-        })
-        return [
-          //@ts-ignore
-          ...flatTabArticles,
-          ...articles.flat()
-        ]
-      }, [])
-    //@ts-ignore
-    return articles
-      .find(({
+            if (i.collection) {
+              //@ts-ignore
+              return i.articles;
+            } else {
+              return i;
+            }
+          });
+          return [
+            //@ts-ignore
+            ...flatTabArticles,
+            ...articles.flat(),
+          ];
+        }, []);
+      //@ts-ignore
+      return (
         //@ts-ignore
-        articleId: _articleId
-      }) => {
-        return articleId === _articleId
-    }) || null
-  }, [store?.articles])
-  const openBottomSeet = useCallback((child?: JSX.Element, header?: JSX.Element) => {
-    setIsOpenBottomSheet(true)
-    setBottomSheetChildren(child)
-    setBottomSheetHeader(header)
-  }, [])
-  return <storeContext.Provider value={
-    useMemo(() => ({
-      ...store,
-      uiState: {
-        ...store.uiState,
-        isNarrowDevice: (window.screen.availWidth < 768),
-        actions: {
+        articles.find(
+          ({
+            //@ts-ignore
+            articleId: _articleId,
+          }) => {
+            return articleId === _articleId;
+          }
+        ) || null
+      );
+    },
+    [store?.articles]
+  );
+  const openBottomSeet = useCallback(
+    (child?: JSX.Element, header?: JSX.Element) => {
+      setIsOpenBottomSheet(true);
+      setBottomSheetChildren(child);
+      setBottomSheetHeader(header);
+    },
+    []
+  );
+  return (
+    <storeContext.Provider
+      value={useMemo(
+        () => ({
+          ...store,
+          uiState: {
+            ...store.uiState,
+            isNarrowDevice: window.screen.availWidth < 768,
+            actions: {
+              changeSelectedTab,
+              changeSelectedArticle,
+              setBottomSheetChildren: openBottomSeet,
+              closeBottomSheet: () => {
+                setIsOpenBottomSheet(false);
+              },
+            },
+          },
+          articles: {
+            ...store.articles,
+            actions: {
+              recordTabBlogs,
+              getArticlesByTabName,
+              getArticleInfo,
+            },
+          },
+        }),
+        [
+          recordTabBlogs,
+          store,
+          getArticleInfo,
           changeSelectedTab,
           changeSelectedArticle,
-          setBottomSheetChildren: openBottomSeet,
-          closeBottomSheet: () => {
-            setIsOpenBottomSheet(false)
-          }
-        }
-      },
-      articles: {
-        ...store.articles,
-        actions: {
-          recordTabBlogs,
-          getArticlesByTabName,
-          getArticleInfo
-        }
-      }
-    }), [recordTabBlogs, store, getArticleInfo, changeSelectedTab, changeSelectedArticle, openBottomSeet])
-  }>
-<div>
-     {children}
-     {
-        (window.screen.availWidth < 768)
-        &&  <BottomSheet
-          //@ts-ignore
-          ref={bottomSheetRef}
-          snapPoints={({ minHeight, maxHeight }) => [minHeight, maxHeight / 0.6]}
-          header={bottomSheetHeader}
-          onDismiss={useCallback(() => {
-            setIsOpenBottomSheet(false)
-          }, [])}
-          open={isOpenBottomSheet}
-        >
-          {bottomSheetChildren}
-        </BottomSheet>
-      }
-    </div>
-  </storeContext.Provider>
-}
+          openBottomSeet,
+        ]
+      )}
+    >
+      <div>
+        {children}
+        {window.screen.availWidth < 768 && (
+          <BottomSheet
+            //@ts-ignore
+            ref={bottomSheetRef}
+            snapPoints={({ minHeight, maxHeight }) => [
+              minHeight,
+              maxHeight / 0.6,
+            ]}
+            header={bottomSheetHeader}
+            onDismiss={useCallback(() => {
+              setIsOpenBottomSheet(false);
+            }, [])}
+            open={isOpenBottomSheet}
+          >
+            {bottomSheetChildren}
+          </BottomSheet>
+        )}
+      </div>
+    </storeContext.Provider>
+  );
+};
 
 export const useStore = (getStatePiece: (state: Store) => any) => {
-  const state = useContext(storeContext)
-  return getStatePiece(state)
-}
+  const state = useContext(storeContext);
+  return getStatePiece(state);
+};
 
-export default ConnectStore
-
+export default ConnectStore;
